@@ -122,7 +122,7 @@ const RegistroHotel = () => {
             </div>
             <div className="mb-3 row align-items-center">
               <label className="col-4 col-form-label">RH:</label>
-              <div className="col-8">
+              <div className="col-3">
                 <input
                   type="text"
                   className="form-control"
