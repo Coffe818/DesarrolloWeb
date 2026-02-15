@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beca</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Solicitud Beca</h2>
+
+    <form>
+      <div>
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula">
+      </div>
+      <br>
+
+      <div>
+        <label for="nombre_completo">Nombre Completo:</label>
+        <input type="text" id="nombre_completo" name="nombre_completo">
+      </div>
+      <br>
+
+      <div>
+        <label for="municipio">Municipio:</label>
+        <select id="municipio" name="municipio">
+          <option value="">Selecciona un municipio</option>
+        </select>
+      </div>
+      <br>
+
+      <div>
+        <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+      </div>
+      <br>
+
+      <div>
+        <label>Nivel que Cursa:</label>
+        
+        <input type="radio" id="bachillerato" name="nivel_estudios" value="bachillerato">
+        <label for="bachillerato">Bachillerato</label>
+        
+        <input type="radio" id="superior" name="nivel_estudios" value="superior">
+        <label for="superior">Superior</label>
+      </div>
+      <br>
+
+      <div>
+        <button type="submit" id="btn_registrar">Registrar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

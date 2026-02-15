@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beca</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Registro de Egresos</h2>
+
+    <form>
+      <div>
+        <label for="fecha_registro">Fecha de Registro (yyyy-mm-dd)</label>
+        <input type="date" id="fecha_registro" name="fecha_registro" value="2023-11-22">
+
+        <label for="solicitud_pago">Solicitud de pago</label>
+        <input type="text" id="solicitud_pago" name="solicitud_pago" placeholder="# Solicitud de pago">
+
+        <label for="folio">Folio (Transferencia/Cheque)</label>
+        <input type="text" id="folio" name="folio" placeholder="Transferencia/Cheque">
+      </div>
+      <br>
+
+      <div>
+        <label for="beneficiario">Beneficiario</label>
+        <select id="beneficiario" name="beneficiario">
+          <option value="">Selecciona:</option>
+        </select>
+      </div>
+      <br>
+
+      <div>
+        <label for="cargo">Cargo</label>
+        <input type="text" id="cargo" name="cargo" placeholder="Ejemplo: 23030.45">
+
+        <label for="fecha_pago">Fecha de pago (yyyy-mm-dd)</label>
+        <input type="date" id="fecha_pago" name="fecha_pago">
+
+        <label for="componente">Componente</label>
+        <select id="componente" name="componente">
+          <option value="">Selecciona:</option>
+        </select>
+      </div>
+      <br>
+
+      <div>
+        <label for="accion">Acción</label>
+        <select id="accion" name="accion">
+          <option value="">Selecciona:</option>
+        </select>
+
+        <label for="descripcion">Descripción</label>
+        <input type="text" id="descripcion" name="descripcion" placeholder="Escriba una descripción">
+      </div>
+      <br>
+
+      <div>
+        <label for="num_solicitud">Número de Solicitud</label>
+        <input type="text" id="num_solicitud" name="num_solicitud" placeholder="Escriba el Número de Solicitud">
+
+        <label for="factura">Factura</label>
+        <input type="text" id="factura" name="factura" placeholder="Escriba dato de factura">
+
+        <label for="partida">Partida</label>
+        <input type="text" id="partida" name="partida" placeholder="Escriba partida númerica">
+      </div>
+      <br>
+
+      <div>
+        <input type="text" id="archivo_nombre" name="archivo_nombre" placeholder="Selecciona archivo..." readonly>
+        <button type="button" id="btn_asignar">Asignar archivo</button>
+        <input type="file" id="archivo_input" name="archivo_input" style="display: none;">
+      </div>
+
+      <br>
+      <div>
+        <button type="submit" id="btn_registrar">Registrar Egreso</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
