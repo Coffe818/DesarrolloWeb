@@ -1,0 +1,156 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 70rem;
+  margin: 2rem auto;
+  background: #ffffff;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  text-align: center;
+  border-bottom: 2px solid #0056b3;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #0056b3;
+}
+
+button {
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #004494;
+}
+
+.salto {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.row .salto {
+  transition: all .3s ease-in-out;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+ul li {
+  padding: 0.5rem 0;
+  color: #666;
+  font-size: 0.9rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+ul li::before {
+  content: "•";
+  color: #0056b3;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.flash-messages {
+  margin-bottom: 1.5rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+@media (min-width: 48rem) {
+  .row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .row .salto {
+    margin-bottom: 0;
+  }
+
+  .flex-1 {
+    flex: 1 !important;
+  }
+
+  .flex-2 {
+    flex: 2 !important;
+  }
+}
