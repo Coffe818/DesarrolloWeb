@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="name" placeholder="Tu nombre" required
+                [(ngModel)]="user.nombre" name="nombre">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" placeholder="****" required
+                  [(ngModel)]="user.contrasena" name="contrasena">
+                <button class="btn btn-outline-secondary d-flex align-items-center" type="button"
+                  (click)="togglePassword()">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

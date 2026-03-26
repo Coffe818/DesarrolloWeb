@@ -1,0 +1,39 @@
+.welcome-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    font-family: 'Roboto', sans-serif;
+}
+
+.icon-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.icon-circle:hover {
+    transform: rotate(15deg);
+}
+
+/* Ajustes para botones en mobile */
+.btn {
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+@media (max-width: 576px) {
+    .display-5 {
+        font-size: 2.2rem;
+    }
+
+    .btn-lg {
+        width: 100%;
+    }
+}

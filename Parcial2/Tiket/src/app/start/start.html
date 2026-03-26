@@ -1,0 +1,37 @@
+<div class="welcome-container d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="container px-4 text-center">
+
+    <!-- Logo o Icono Principal -->
+    <div class="mb-4 d-flex justify-content-center">
+      <div class="icon-circle bg-primary text-white shadow-sm">
+        <span class="material-icons" style="font-size: 4rem;">confirmation_number</span>
+      </div>
+    </div>
+
+    <!-- Título y Bajada -->
+    <h1 class="display-5 fw-bold text-dark mb-3">Sistema de Turnos</h1>
+    <p class="lead text-secondary mb-5">
+      Gestioná tus trámites de forma rápida y sin filas. Seleccioná una opción para comenzar.
+    </p>
+
+    <!-- Botones de Acción (Stackeados en Mobile, Fila en Desktop) -->
+    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+      <button routerLink="/crear-tiket"
+        class="btn btn-primary btn-lg px-4 py-3 shadow-sm d-flex align-items-center justify-content-center">
+        <span class="material-icons me-2">add_circle</span>
+        Sacar Nuevo Ticket
+      </button>
+
+      <button routerLink="/login"
+        class="btn btn-outline-primary btn-lg px-4 py-3 d-flex align-items-center justify-content-center">
+        <span class="material-icons me-2">admin_panel_settings</span>
+        Acceso Administrador
+      </button>
+    </div>
+
+    <!-- Footer Simple -->
+    <div class="mt-5 pt-4 border-top">
+      <small class="text-muted">© 2026 Tiket - Gobierno de Coahuila</small>
+    </div>
+  </div>
+</div>
