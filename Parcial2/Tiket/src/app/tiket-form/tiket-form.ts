@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Tiket } from '../../models/tiket.model';
+import { TiketService } from '../../service/TiketService.service';
 
 @Component({
   selector: 'app-tiket-form',
@@ -13,8 +14,12 @@ import { Tiket } from '../../models/tiket.model';
 })
 export class TiketForm {
   activeTab: 'nuevo' | 'editar' = 'nuevo';
-
+  tiketService = inject(TiketService);
   tiket: Tiket = new Tiket();
+  tiketBusqueda = {
+    curp: '',
+    turno: ''
+  };
 
   setActiveTab(tab: 'nuevo' | 'editar') {
     this.activeTab = tab;
@@ -46,7 +51,7 @@ export class TiketForm {
       alert('El "Teléfono" es obligatorio');
       return;
     }
-    if (!this.tiket.celular.trim()) {
+    if (!this.tiket.celular.toString().trim() || this.tiket.celular.toString().length < 10) {
       alert('El "Celular" es obligatorio');
       return;
     }
@@ -78,5 +83,15 @@ export class TiketForm {
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  consultarTicket() {
+
+    this.tiketService.getTickets().subscribe((tickets: Tiket[]) => {
+      const tiket = tickets[0];
+      console.log('Ticket encontrado:', tiket.nombre);
+      alert(`Ticket encontrado: ${tiket.nombre} ${tiket.apellido_paterno} ${tiket.apellido_materno}`);
+    });
+
   }
 }

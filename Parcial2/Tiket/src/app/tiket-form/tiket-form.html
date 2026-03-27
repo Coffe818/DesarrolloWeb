@@ -11,10 +11,12 @@
   <!-- Selector de Acción: Tabs -->
   <ul class="nav nav-pills nav-justified mb-4 bg-white p-2 rounded shadow-sm">
     <li class="nav-item">
-      <button class="nav-link" [class.active]="activeTab === 'nuevo'" (click)="setActiveTab('nuevo')">Generar Nuevo</button>
+      <button class="nav-link" [class.active]="activeTab === 'nuevo'" (click)="setActiveTab('nuevo')">Generar
+        Nuevo</button>
     </li>
     <li class="nav-item">
-      <button class="nav-link" [class.active]="activeTab === 'editar'" (click)="setActiveTab('editar')">Consultar / Editar</button>
+      <button class="nav-link" [class.active]="activeTab === 'editar'" (click)="setActiveTab('editar')">Consultar /
+        Editar</button>
     </li>
   </ul>
 
@@ -24,7 +26,7 @@
       <div class="card border-0 shadow-sm p-4">
         <h5 class="mb-3 text-primary">Nuevo Registro</h5>
         <p class="text-muted">Llená el formulario para obtener tu turno.</p>
-        
+
         <form>
           <div class="mb-2">
             <label class="form-label">Nombre del que realiza</label>
@@ -86,7 +88,8 @@
             <label class="form-label">Asunto</label>
             <textarea [(ngModel)]="tiket.asunto" name="asunto" class="form-control" rows="3"></textarea>
           </div>
-          <button type="button" (click)="registrarTicket()" class="btn btn-primary w-100 py-2 shadow-sm">Registrar Ticket</button>
+          <button type="button" (click)="registrarTicket()" class="btn btn-primary w-100 py-2 shadow-sm">Registrar
+            Ticket</button>
         </form>
       </div>
     </div>
@@ -97,13 +100,13 @@
         <h5 class="mb-3 text-primary">Buscar mi ticket</h5>
         <div class="mb-3">
           <label class="form-label">CURP</label>
-          <input type="text" class="form-control" placeholder="Ej. AAAA000000AAAAAA00">
+          <input [(ngModel)]="tiketBusqueda.curp" name="curp" type="text" class="form-control" placeholder="Ej. AAAA000000AAAAAA00" maxlength="18">
         </div>
         <div class="mb-4">
           <label class="form-label">Número de Turno</label>
-          <input type="number" class="form-control" placeholder="Ej. 123">
+          <input [(ngModel)]="tiketBusqueda.turno" name="turno" type="number" class="form-control" placeholder="Ej. 123">
         </div>
-        <button class="btn btn-primary w-100 py-2 shadow-sm">Consultar</button>
+        <button type="button" (click)="consultarTicket()" class="btn btn-primary w-100 py-2 shadow-sm">Consultar</button>
       </div>
     </div>
   </div>
