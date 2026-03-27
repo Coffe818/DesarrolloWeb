@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/tiket/browser",
+  "outputDirectory": "dist/Tiket",
+  "framework": "angular",
   "rewrites": [
     {
       "source": "/(.*)",
