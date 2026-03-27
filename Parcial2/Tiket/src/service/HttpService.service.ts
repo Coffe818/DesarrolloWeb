@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class HttpService {
-    apiUrl = environment.UrlApi;
+    apiUrl = environment.API_URL;
     private readonly headers = new HttpHeaders({
         'Accept': 'application/json',
         'User-Agent': 'Custom-Agent'
