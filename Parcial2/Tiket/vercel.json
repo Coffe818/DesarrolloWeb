@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/Tiket",
+  "outputDirectory": "dist/Tiket/browser",
   "framework": "angular",
   "rewrites": [
     {
