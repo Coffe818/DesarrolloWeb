@@ -1,5 +1,4 @@
 export class User {
-    nombre: string = '';
+    nombre_usuario: string = '';
     contrasena: string = '';
-    captcha: boolean = false;
 }

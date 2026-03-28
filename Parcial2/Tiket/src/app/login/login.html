@@ -1,28 +1,73 @@
-<div class="container mt-5">
+<div class="container py-4">
+  <!-- Header con icono y título -->
+  <div class="text-center mb-4">
+    <div class="mb-3 d-flex justify-content-center">
+      <div class="icon-circle bg-primary text-white shadow-sm">
+        <span class="material-icons" style="font-size: 3rem;">admin_panel_settings</span>
+      </div>
+    </div>
+    <h2 class="fw-bold text-dark">Panel de Administración</h2>
+    <p class="text-muted">Ingresá tus credenciales para continuar</p>
+  </div>
+
+  <!-- Formulario de Login -->
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow">
-        <div class="card-body">
-          <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
-          <form>
-            <div class="mb-3">
-              <label for="name" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="name" placeholder="Tu nombre" required
-                [(ngModel)]="user.nombre" name="nombre">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card border-0 shadow-sm p-4">
+        <form (ngSubmit)="onLogin()">
+          <!-- Usuario -->
+          <div class="mb-3">
+            <label for="nombre" class="form-label fw-semibold">Usuario</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingresá tu usuario"
+              [(ngModel)]="user.nombre_usuario" name="nombre" required>
+          </div>
+
+          <!-- Contraseña -->
+          <div class="mb-3">
+            <label for="password" class="form-label fw-semibold">Contraseña</label>
+            <div class="input-group">
+              <input [type]="passwordVisible() ? 'text' : 'password'" class="form-control" id="password"
+                placeholder="Ingresá tu contraseña" [(ngModel)]="user.contrasena" name="contrasena" required>
+              <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                <span class="material-icons">{{ passwordVisible() ? 'visibility_off' : 'visibility' }}</span>
+              </button>
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
-              <div class="input-group">
-                <input type="password" class="form-control" id="password" placeholder="****" required
-                  [(ngModel)]="user.contrasena" name="contrasena">
-                <button class="btn btn-outline-secondary d-flex align-items-center" type="button"
-                  (click)="togglePassword()">
-                  <mat-icon>visibility</mat-icon>
+          </div>
+
+          <!-- Captcha -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Verificación de seguridad</label>
+            <div class="captcha-container p-3 bg-light rounded">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="captcha-box bg-white border border-primary rounded p-2">
+                  <span class="captcha-question">
+                    {{ captchaNum1() }} + {{ captchaNum2() }} = ?
+                  </span>
+                </div>
+                <button type="button" class="btn btn-outline-primary btn-sm ms-2" (click)="generateCaptcha()"
+                  title="Generar nuevo captcha">
+                  <span class="material-icons">refresh</span>
                 </button>
               </div>
+              <input type="number" class="form-control mt-2" id="captcha" placeholder="Ingresá el resultado"
+                [(ngModel)]="captchaAnswer" name="captcha" [class.is-invalid]="captchaError()">
+              <div class="invalid-feedback" *ngIf="captchaError()">
+                Respuesta incorrecta. Intentá de nuevo.
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-          </form>
+          </div>
+
+          <!-- Botón Entrar -->
+          <button type="submit"
+            class="btn btn-primary w-100 py-2 shadow-sm d-flex align-items-center justify-content-center">
+            <span class="material-icons me-2">login</span>
+            Iniciar Sesión
+          </button>
+        </form>
+
+        <!-- Footer -->
+        <div class="text-center mt-3">
+          <small class="text-muted">¿Olvidaste tu contraseña? Contactá al administrador</small>
         </div>
       </div>
     </div>
