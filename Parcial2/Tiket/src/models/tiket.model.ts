@@ -1,4 +1,4 @@
-export class Tiket {
+export class Ticket {
   is_new: boolean = true;
   ticket_id?: number = 0;
   nombre_realiza: string = '';

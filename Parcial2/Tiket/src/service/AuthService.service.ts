@@ -1,5 +1,5 @@
 import { map } from 'rxjs';
-import { Tiket } from '../models/tiket.model';
+import { Ticket } from '../models/tiket.model';
 import { HttpService } from './HttpService.service';
 import { inject, Injectable } from '@angular/core';
 import { User } from '../models/user.model';
@@ -14,7 +14,7 @@ export class AuthService {
 
     logIn(usuario: User) {
         return this.httpService.post<any>('/api/auth/login/', usuario).pipe(
-            map(response => response.results as Tiket[])
+            map(response => response.results as Ticket[])
         );
     }
 

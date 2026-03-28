@@ -2,8 +2,9 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Tiket } from '../../models/tiket.model';
+import { Ticket } from '../../models/tiket.model';
 import { TiketService } from '../../service/TiketService.service';
+import { AlertService } from '../../service/AlertService.service';
 
 @Component({
   selector: 'app-tiket-form',
@@ -13,70 +14,86 @@ import { TiketService } from '../../service/TiketService.service';
   styleUrl: './tiket-form.css',
 })
 export class TiketForm {
+  ticketService = inject(TiketService);
+  alertService = inject(AlertService);
+
   activeTab: 'nuevo' | 'editar' = 'nuevo';
-  tiketService = inject(TiketService);
-  tiket: Tiket = new Tiket();
-  tiketBusqueda = {
+  ticket: Ticket = new Ticket();
+  ticketBusqueda = {
     curp: '',
     turno: ''
   };
+
+  navName = 'Generar Nuevo';
 
   setActiveTab(tab: 'nuevo' | 'editar') {
     this.activeTab = tab;
   }
 
-  registrarTicket() {
+  validarTicket() {
     // Validar que todos los campos obligatorios estén completos
-    if (!this.tiket.nombre_realiza.trim()) {
-      alert('El campo "Nombre del que realiza" es obligatorio');
-      return;
+    if (!this.ticket.nombre_realiza.trim()) {
+      this.alertService.error('El campo "Nombre del que realiza" es obligatorio');
+      return false;
     }
-    if (!this.tiket.curp.trim() || this.tiket.curp.length !== 18) {
-      alert('El CURP es obligatorio y debe tener 18 caracteres');
-      return;
+    if (!this.ticket.curp.trim() || this.ticket.curp.length !== 18) {
+      this.alertService.error('El CURP es obligatorio y debe tener 18 caracteres');
+      return false;
     }
-    if (!this.tiket.nombre.trim()) {
-      alert('El campo "Nombre" es obligatorio');
-      return;
+    if (!this.ticket.nombre.trim()) {
+      this.alertService.error('El campo "Nombre" es obligatorio');
+      return false;
     }
-    if (!this.tiket.apellido_paterno.trim()) {
-      alert('El "Apellido Paterno" es obligatorio');
-      return;
+    if (!this.ticket.apellido_paterno.trim()) {
+      this.alertService.error('El "Apellido Paterno" es obligatorio');
+      return false;
     }
-    if (!this.tiket.apellido_materno.trim()) {
-      alert('El "Apellido Materno" es obligatorio');
-      return;
+    if (!this.ticket.apellido_materno.trim()) {
+      this.alertService.error('El "Apellido Materno" es obligatorio');
+      return false;
     }
-    if (!this.tiket.telefono.trim()) {
-      alert('El "Teléfono" es obligatorio');
-      return;
+    if (!this.ticket.telefono.trim()) {
+      this.alertService.error('El "Teléfono" es obligatorio');
+      return false;
     }
-    if (!this.tiket.celular.toString().trim() || this.tiket.celular.toString().length < 10) {
-      alert('El "Celular" es obligatorio');
-      return;
+    if (!this.ticket.celular.toString().trim() || this.ticket.celular.toString().length < 10) {
+      this.alertService.error('El "Celular" es obligatorio');
+      return false;
     }
-    if (!this.tiket.correo.trim() || !this.isValidEmail(this.tiket.correo)) {
-      alert('El "Correo" es obligatorio y debe ser válido');
-      return;
+    if (!this.ticket.correo.trim() || !this.isValidEmail(this.ticket.correo)) {
+      this.alertService.error('El "Correo" es obligatorio y debe ser válido');
+      return false;
     }
-    if (!this.tiket.nivel_estudios.trim()) {
-      alert('El "Nivel de Estudios" es obligatorio');
-      return;
+    if (!this.ticket.nivel_estudios.trim()) {
+      this.alertService.error('El "Nivel de Estudios" es obligatorio');
+      return false;
     }
-    if (!this.tiket.municipio.trim()) {
-      alert('El "Municipio" es obligatorio');
-      return;
+    if (!this.ticket.municipio.trim()) {
+      this.alertService.error('El "Municipio" es obligatorio');
+      return false;
     }
-    if (!this.tiket.asunto.trim()) {
-      alert('El "Asunto" es obligatorio');
-      return;
+    if (!this.ticket.asunto.trim()) {
+      this.alertService.error('El "Asunto" es obligatorio');
+      return false;
     }
 
+    return true;
+  }
+  guardarTicket() {
+    if (!this.validarTicket()) return;
+
+    this.navName = 'Generar Nuevo';
     // Si pasa todas las validaciones, registrar el ticket
-    console.log('Ticket a registrar:', this.tiket);
-    alert('¡Ticket registrado exitosamente!');
+    console.log('Ticket a registrar:', this.ticket);
+    this.alertService.success('¡Ticket registrado exitosamente!');
     // Resetear el formulario
-    this.tiket = new Tiket();
+    this.ticket = new Ticket();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
   }
 
   // Función auxiliar para validar email
@@ -87,11 +104,15 @@ export class TiketForm {
 
   consultarTicket() {
 
-    this.tiketService.getTickets().subscribe((tickets: Tiket[]) => {
-      const tiket = tickets[0];
-      console.log('Ticket encontrado:', tiket.nombre);
-      alert(`Ticket encontrado: ${tiket.nombre} ${tiket.apellido_paterno} ${tiket.apellido_materno}`);
-    });
+    // this.ticketService.TicketGet().subscribe((tickets: Ticket[]) => {
+    //   if (tickets.length > 0) {
+    //     const ticket = tickets[0];
+
+    //   }
+
+    // });
+    this.setActiveTab('nuevo');
+    this.navName = 'Editando Ticket ' + this.ticketBusqueda.curp + ' - Turno ' + this.ticketBusqueda.turno;
 
   }
 }

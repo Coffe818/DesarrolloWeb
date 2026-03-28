@@ -4,17 +4,33 @@
   --primary: #007bff;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #1a1a1a;
-    --text-color: #f0f0f0;
-    --primary: #bb86fc;
-  }
-} */
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
   font-family: sans-serif;
+}
+
+.swal2-container.swal2-top-end {
+  width: 100% !important;
+}
+
+/* Estilo para PC */
+.my-custom-toast {
+  /* max-width: 30vw !important; */
+  width: 30vw !important;
+  /* El tamaño que desees en escritorio */
+  /* padding: 20px !important; */
+  font-size: 1.25rem;
+  /* Si quieres que el texto también sea más grande */
+}
+
+/* Ajuste para que en Móvil no se vea gigante */
+@media (max-width: 768px) {
+  .my-custom-toast {
+    width: 90vw !important;
+    /* 90% del ancho de la pantalla del celular */
+    font-size: 1rem;
+  }
 }

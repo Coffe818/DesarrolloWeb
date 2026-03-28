@@ -1,5 +1,5 @@
 import { map } from 'rxjs';
-import { Tiket } from '../models/tiket.model';
+import { Ticket } from '../models/tiket.model';
 import { HttpService } from './HttpService.service';
 import { inject, Injectable } from '@angular/core';
 
@@ -11,9 +11,9 @@ export class TiketService {
   private httpService = inject(HttpService);
   constructor() { }
 
-  getTickets() {
+  TicketGet() {
     return this.httpService.get<any>('/api/tickets/').pipe(
-      map(response => response.results as Tiket[])
+      map(response => response.results as Ticket[])
     );
   }
 
