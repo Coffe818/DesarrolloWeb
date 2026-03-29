@@ -11,8 +11,13 @@
   <!-- Selector de Acción: Tabs -->
   <ul class="nav nav-pills nav-justified mb-4 bg-white p-2 rounded shadow-sm">
     <li class="nav-item">
-      <button class="nav-link" [class.active]="activeTab === 'nuevo'" (click)="setActiveTab('nuevo')">{{ navName
-        }}</button>
+      <button class="nav-link" [class.active]="activeTab === 'nuevo'" (click)="setActiveTab('nuevo')">
+        @if (editando) {
+        Editando Ticket
+        } @else {
+        Generar Nuevo
+        }
+      </button>
     </li>
     <li class="nav-item">
       <button class="nav-link" [class.active]="activeTab === 'editar'" (click)="setActiveTab('editar')">Consultar /
@@ -22,9 +27,35 @@
 
   <div class="tab-content">
     <!-- NUEVO TICKET -->
-    <div class="tab-pane fade" [class.show]="activeTab === 'nuevo'" [class.active]="activeTab === 'nuevo'">
+    <div class="tab-pane " [class.show]="activeTab === 'nuevo'" [class.active]="activeTab === 'nuevo'">
       <div class="card border-0 shadow-sm p-4">
-        <h5 class="mb-3 text-primary">Nuevo Registro</h5>
+
+        <div class="d-flex align-items-center mb-4">
+          <div class="d-flex align-items-center flex-wrap gap-2">
+            <h5 class="text-primary m-0">
+              @if (editando) {
+              Ticket #{{ ticket.turno }}
+              } @else {
+              Nuevo Ticket
+              }
+            </h5>
+
+            @if (editando) {
+            <span class="badge rounded-pill" [class.bg-warning]="ticket.estatus_ticket === 'PENDIENTE'"
+              [class.bg-success]="ticket.estatus_ticket === 'RESUELTO'">
+              {{ ticket.estatus_ticket }}
+            </span>
+            <small class="text-muted fw-semibold">
+              {{ ticket.curp }}
+            </small>
+            }
+          </div>
+
+          <button class="btn btn-outline-secondary ms-auto btn-sm d-flex align-items-center" (click)="nuevo()">
+            <span class="material-icons">add</span>
+          </button>
+        </div>
+
         <p class="text-muted">Llená el formulario para obtener tu turno.</p>
 
         <form>
@@ -68,19 +99,21 @@
             <div class="col-6 mb-2">
               <label class="form-label">Nivel Estudios</label>
               <select [(ngModel)]="ticket.nivel_estudios" name="nivel_estudios" class="form-select">
-                <option value="">Seleccione...</option>
-                <option value="Primaria">Primaria</option>
-                <option value="Secundaria">Secundaria</option>
-                <option value="Bachillerato">Bachillerato</option>
-                <option value="Licenciatura">Licenciatura</option>
+                <option value="">-- Seleccione --</option>
+
+                @for (nombre of nivelesEstudios(); track nombre) {
+                <option [value]="nombre">{{ nombre }}</option>
+                }
               </select>
             </div>
             <div class="col-6 mb-2">
               <label class="form-label">Municipio</label>
               <select [(ngModel)]="ticket.municipio" name="municipio" class="form-select">
-                <option value="">Seleccione...</option>
-                <option value="Abasolo">Abasolo</option>
-                <option value="Saltillo">Saltillo</option>
+                <option value="">-- Seleccione --</option>
+
+                @for (nombre of municipiosName(); track nombre) {
+                <option [value]="nombre">{{ nombre }}</option>
+                }
               </select>
             </div>
           </div>
@@ -88,14 +121,37 @@
             <label class="form-label">Asunto</label>
             <textarea [(ngModel)]="ticket.asunto" name="asunto" class="form-control" rows="3"></textarea>
           </div>
-          <button type="button" (click)="guardarTicket()" class="btn btn-primary w-100 py-2 shadow-sm">Registrar
-            Ticket</button>
+          @if(editando) {
+          <div class="row g-2">
+            <div [class]="ticket.estatus_ticket === 'PENDIENTE' ? 'col-12 col-md-6' : 'col-12'">
+              <button type="button" (click)="imprimirTicket()"
+                class="btn btn-outline-primary w-100 py-2 shadow-sm d-flex align-items-center justify-content-center">
+                <span class="material-icons align-middle me-1">print</span> Imprimir Ticket
+              </button>
+            </div>
+
+            @if (ticket.estatus_ticket === "PENDIENTE") {
+            <div class="col-12 col-md-6">
+              <button type="button" (click)="guardarTicket()"
+                class="btn btn-primary w-100 py-2 shadow-sm d-flex align-items-center justify-content-center">
+                <span class="material-icons align-middle me-1">save</span> Actualizar Ticket
+              </button>
+            </div>
+            }
+          </div>
+          } @else {
+          <button type="button" (click)="guardarTicket()"
+            class="btn btn-primary w-100 py-2 shadow-sm d-flex align-items-center justify-content-center">
+            <span class="material-icons align-middle me-1">save</span>Registrar Ticket
+          </button>
+          }
+
         </form>
       </div>
     </div>
 
     <!-- CONSULTAR/EDITAR -->
-    <div class="tab-pane fade" [class.show]="activeTab === 'editar'" [class.active]="activeTab === 'editar'">
+    <div class="tab-pane " [class.show]="activeTab === 'editar'" [class.active]="activeTab === 'editar'">
       <div class="card border-0 shadow-sm p-4">
         <h5 class="mb-3 text-primary">Buscar mi ticket</h5>
         <div class="mb-3">

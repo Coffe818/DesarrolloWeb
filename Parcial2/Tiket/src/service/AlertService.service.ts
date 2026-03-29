@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { provideSweetAlert2 } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -16,10 +15,10 @@ export class AlertService {
         timerProgressBar: true,
         target: 'body',
         showClass: {
-            popup: 'animate__animated animate__backInRight animate__fast'
+            popup: 'animate__animated animate__slideInRight animate__faster'
         },
         hideClass: {
-            popup: 'animate__animated animate__backOutRight '
+            popup: 'animate__animated animate__slideOutRight animate__slow'
         },
         customClass: {
             popup: 'my-custom-toast'

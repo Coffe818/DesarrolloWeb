@@ -1,10 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Ticket } from '../../models/tiket.model';
 import { TiketService } from '../../service/TiketService.service';
 import { AlertService } from '../../service/AlertService.service';
+import { MunicipioService } from '../../service/MunicipioService.service';
+import { NivelEstudioService } from '../../service/NivelEstudioService.service';
+import { UtilService } from '../../service/UtilService.service';
 
 @Component({
   selector: 'app-tiket-form',
@@ -16,28 +19,41 @@ import { AlertService } from '../../service/AlertService.service';
 export class TiketForm {
   ticketService = inject(TiketService);
   alertService = inject(AlertService);
+  municipioService = inject(MunicipioService);
+  nivelService = inject(NivelEstudioService);
+  utilService = inject(UtilService);
+  cdr = inject(ChangeDetectorRef);
 
   activeTab: 'nuevo' | 'editar' = 'nuevo';
   ticket: Ticket = new Ticket();
-  ticketBusqueda = {
-    curp: '',
-    turno: ''
-  };
+  ticketBusqueda: Ticket = new Ticket();
 
-  navName = 'Generar Nuevo';
+  municipiosName = this.municipioService.municipiosNames
+  nivelesEstudios = this.nivelService.nivelesEstudios
+
+  editando = false;
+
 
   setActiveTab(tab: 'nuevo' | 'editar') {
     this.activeTab = tab;
   }
+  nuevo() {
+    this.ticket = new Ticket();
+    this.editando = false;
+    this.setActiveTab('nuevo');
+  }
 
   validarTicket() {
-    // Validar que todos los campos obligatorios estén completos
     if (!this.ticket.nombre_realiza.trim()) {
       this.alertService.error('El campo "Nombre del que realiza" es obligatorio');
       return false;
     }
-    if (!this.ticket.curp.trim() || this.ticket.curp.length !== 18) {
-      this.alertService.error('El CURP es obligatorio y debe tener 18 caracteres');
+    if (!this.ticket.curp.trim()) {
+      this.alertService.error('El CURP es obligatorio');
+      return false;
+    }
+    if (!this.utilService.validarCURP(this.ticket.curp)) {
+      this.alertService.error('El CURP no es válido');
       return false;
     }
     if (!this.ticket.nombre.trim()) {
@@ -56,12 +72,20 @@ export class TiketForm {
       this.alertService.error('El "Teléfono" es obligatorio');
       return false;
     }
-    if (!this.ticket.celular.toString().trim() || this.ticket.celular.toString().length < 10) {
+    if (!this.utilService.validarTelefono(this.ticket.telefono)) {
+      this.alertService.error('El "Teléfono" no es válido');
+      return false;
+    }
+    if (!this.ticket.celular.toString().trim()) {
       this.alertService.error('El "Celular" es obligatorio');
       return false;
     }
-    if (!this.ticket.correo.trim() || !this.isValidEmail(this.ticket.correo)) {
-      this.alertService.error('El "Correo" es obligatorio y debe ser válido');
+    if (!this.ticket.correo.trim()) {
+      this.alertService.error('El "Correo" es obligatorio');
+      return false;
+    }
+    if (!this.utilService.validarEmail(this.ticket.correo)) {
+      this.alertService.error('El "Correo" no es válido');
       return false;
     }
     if (!this.ticket.nivel_estudios.trim()) {
@@ -80,39 +104,78 @@ export class TiketForm {
     return true;
   }
   guardarTicket() {
+    console.log("intentando guardar", this.ticket);
+
     if (!this.validarTicket()) return;
 
-    this.navName = 'Generar Nuevo';
-    // Si pasa todas las validaciones, registrar el ticket
-    console.log('Ticket a registrar:', this.ticket);
-    this.alertService.success('¡Ticket registrado exitosamente!');
-    // Resetear el formulario
-    this.ticket = new Ticket();
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+    this.ticketService.TiketSave(this.ticket).subscribe((response: Ticket) => {
+      this.alertService.success('¡Ticket registrado exitosamente!');
+      this.ticketBusqueda.curp = this.ticket.curp;
+      this.ticketBusqueda.turno = response.turno;
+      this.utilService.startLoading();
+      setTimeout(() => {
+        this.utilService.stopLoading();
+        this.consultarTicket();
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }, 1000);
+    })
+
 
   }
+  imprimirTicket() {
 
-  // Función auxiliar para validar email
-  isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
   }
 
   consultarTicket() {
+    if (!this.validarTicketBusqueda()) return;
+    this.ticket = new Ticket();
 
-    // this.ticketService.TicketGet().subscribe((tickets: Ticket[]) => {
-    //   if (tickets.length > 0) {
-    //     const ticket = tickets[0];
+    this.ticketService.TicketGetFilter(this.ticketBusqueda).subscribe((tickets: Ticket[]) => {
+      if (tickets.length > 0) {
 
-    //   }
+        const ticketEncontrado = tickets[0];
+        this.ticket = { ...ticketEncontrado, is_new: false };
 
-    // });
-    this.setActiveTab('nuevo');
-    this.navName = 'Editando Ticket ' + this.ticketBusqueda.curp + ' - Turno ' + this.ticketBusqueda.turno;
+        console.log('Ticket encontrado:', this.ticket);
+        this.alertService.success('¡Ticket encontrado! Puedes editar los datos.');
 
+        // Limpiar búsqueda y cambiar al tab de edición
+        this.ticketBusqueda = new Ticket();
+        this.setActiveTab('nuevo');
+        this.editando = true;
+
+        // Forzar detección de cambios
+        this.cdr.detectChanges();
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // No se encontró el ticket
+        this.alertService.error('No se encontró ningún ticket con ese CURP y turno.');
+      }
+    });
+  }
+
+
+  validarTicketBusqueda() {
+    if (!this.ticketBusqueda.curp.trim()) {
+      this.alertService.error('El CURP es obligatorio');
+      return false;
+    }
+    if (!this.utilService.validarCURP(this.ticketBusqueda.curp)) {
+      this.alertService.error('El CURP no es válido');
+      return false;
+    }
+    if (!this.ticketBusqueda.turno?.toString().trim()) {
+      this.alertService.error('El número de turno es obligatorio');
+      return false;
+    }
+    return true;
   }
 }

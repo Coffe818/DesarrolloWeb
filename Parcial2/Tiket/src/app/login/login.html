@@ -28,8 +28,10 @@
             <div class="input-group">
               <input [type]="passwordVisible() ? 'text' : 'password'" class="form-control" id="password"
                 placeholder="Ingresá tu contraseña" [(ngModel)]="user.contrasena" name="contrasena" required>
-              <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
-                <span class="material-icons">{{ passwordVisible() ? 'visibility_off' : 'visibility' }}</span>
+              <button class="btn btn-outline-secondary d-flex align-items-center" type="button"
+                (click)="togglePassword()">
+                <span class="material-icons ">{{ passwordVisible() ? 'visibility_off' : 'visibility'
+                  }}</span>
               </button>
             </div>
           </div>

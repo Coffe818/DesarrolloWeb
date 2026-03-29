@@ -73,17 +73,12 @@ export class Login {
       return;
     }
     console.log(this.user);
-    this.authService.logIn(this.user).subscribe({
-      next: (response) => {
-        console.log("response", response);
-        alert('¡Bienvenido, ' + this.user.nombre_usuario + '!');
-        // Aquí redirigirías al menú de administración
-        // this.router.navigate(['/menu']);
-      },
-      error: (err) => {
-        alert('Error en la autenticación. Intenta de nuevo.');
-        this.generateCaptcha(); // Regenerar captcha si falla
-      }
+    this.authService.logIn(this.user).subscribe((response) => {
+
+      console.log("response", response);
+      alert('¡Bienvenido, ' + this.user.nombre_usuario + '!');
+      // Aquí redirigirías al menú de administración
+      // this.router.navigate(['/menu']);
     });
     // Simular autenticación (Credenciales: admin / admin123)
     // if (this.user.nombre === 'admin' && this.user.contrasena === 'admin123') {
