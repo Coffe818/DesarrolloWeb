@@ -25,9 +25,19 @@ export class TicketService {
   }
 
   TicketSave(ticket: Ticket) {
-    return this.httpService.post<any>('/api/tickets/', ticket).pipe(
-      map(response => response as Ticket)
-    );;
+    if (ticket.is_new) {
+      console.log('Guardando nuevo ticket:', ticket);
+      return this.httpService.post<any>('/api/tickets/', ticket).pipe(
+        map(response => response as Ticket)
+      );
+    } else {
+      console.log('Actualizando ticket existente:', ticket);
+      const body = this.utilService.buildBody(ticket, ['curp', 'turno', 'nombre_realiza', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono', 'celular', 'correo', 'nivel_estudios', 'municipio', 'asunto', 'estatus_ticket']);
+      return this.httpService.put<any>(`/api/tickets/${ticket.ticket_id}/`, body).pipe(
+        map(response => response as Ticket)
+      );
+
+    }
   }
 
   TicketGestionar(ticket: Ticket) {

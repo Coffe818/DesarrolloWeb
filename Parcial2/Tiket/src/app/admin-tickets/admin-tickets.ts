@@ -8,6 +8,7 @@ import { AlertService } from '../../shared/service/AlertService.service';
 import { MunicipioService } from '../../shared/service/MunicipioService.service';
 import { NivelEstudioService } from '../../shared/service/NivelEstudioService.service';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
+import { UtilService } from '../../shared/service/UtilService.service';
 
 
 
@@ -19,7 +20,7 @@ import { PageHeaderComponent } from '../../shared/components/page-header/page-he
   styleUrl: './admin-tickets.css'
 })
 export class AdminTickets implements OnInit {
-
+  utilService = inject(UtilService);
   ticketService = inject(TicketService);
   alertService = inject(AlertService);
   router = inject(Router);
@@ -44,7 +45,6 @@ export class AdminTickets implements OnInit {
     this.ticketService.TicketGetFilter(this.filterTicket, campos).subscribe({
       next: (tickets) => {
         this.ticketsList = [...tickets];
-
       },
       error: (err) => {
         this.alertService.error('Error al cargar los tickets: ' + err.message);
@@ -57,7 +57,7 @@ export class AdminTickets implements OnInit {
     this.filterTicket.estatus_ticket = ''
     this.filterTicket.ticket_id = undefined
     this.filterTicket.turno = undefined
-    this.buscarTickets();
+    this.refreshTikets();
   }
 
   editTicket(ticket: Ticket) {
@@ -70,7 +70,7 @@ export class AdminTickets implements OnInit {
     this.ticketService.TicketGestionar(ticket).subscribe({
       next: (response) => {
         this.alertService.success(`Ticket ${response.ticket_id} gestionado exitosamente.`);
-        this.buscarTickets();
+        this.refreshTikets();
       },
       error: (err) => {
         this.alertService.error('Error al gestionar el ticket: ' + err.message);
@@ -84,7 +84,7 @@ export class AdminTickets implements OnInit {
         this.ticketService.TicketDelete(ticket.ticket_id!).subscribe({
           next: () => {
             this.alertService.success(`Ticket ${ticket.ticket_id} eliminado exitosamente.`);
-            this.buscarTickets();
+            this.refreshTikets();
           },
           error: (err) => {
             this.alertService.error('Error al eliminar el ticket: ' + err.message);
@@ -92,5 +92,13 @@ export class AdminTickets implements OnInit {
         });
       }
     });
+  }
+
+  refreshTikets() {
+    this.utilService.startLoading();
+    setTimeout(() => {
+      this.utilService.stopLoading();
+      this.buscarTickets();
+    }, 500);
   }
 }

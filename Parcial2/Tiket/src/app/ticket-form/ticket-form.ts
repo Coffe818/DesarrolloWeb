@@ -43,6 +43,7 @@ export class TicketForm {
     if (state?.ticketToEdit) {
       this.ticketBusqueda = state.ticketToEdit;
       this.editando = true;
+      this.ticketBusqueda.is_new = false;
       console.log('Ticket recibido para edición:', this.ticketBusqueda);
       this.consultarTicket();
       this.setActiveTab('nuevo');
@@ -124,6 +125,11 @@ export class TicketForm {
     if (!this.validarTicket()) return;
 
     this.ticketService.TicketSave(this.ticket).subscribe((response: Ticket) => {
+      if (this.editando) {
+        this.alertService.success('¡Ticket actualizado exitosamente!');
+        this.consultarTicket();
+        return;
+      }
       this.alertService.success('¡Ticket registrado exitosamente!');
       this.ticketBusqueda.curp = this.ticket.curp;
       this.ticketBusqueda.turno = response.turno;
