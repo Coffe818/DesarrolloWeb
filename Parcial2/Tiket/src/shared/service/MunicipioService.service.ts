@@ -24,7 +24,7 @@ export class MunicipioService {
 
 
     cargarMunicipios() {
-        if (this._municipios().length > 0 || this.cargando) return;
+        if (this._municipios().length > 0 && this.cargando) return;
 
         this.cargando = true;
         this.httpService.get<any>('/api/municipios/').pipe(

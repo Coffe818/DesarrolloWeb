@@ -1,13 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user.model';
-import { AuthService } from '../../service/AuthService.service';
+import { User } from '../../shared/models/user.model';
+import { AuthService } from '../../shared/service/AuthService.service';
+import { Router } from '@angular/router';
+import { AlertService } from '../../shared/service/AlertService.service';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, PageHeaderComponent],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -15,6 +18,9 @@ export class Login {
   passwordVisible = signal(false);
   user: User = new User();
   authService = inject(AuthService);
+  router = inject(Router);
+  alertService = inject(AlertService);
+
 
   // Captcha Math Variables
   captchaNum1 = signal(0);
@@ -58,37 +64,31 @@ export class Login {
   onLogin() {
     // Validar campos vacíos
     if (!this.user.nombre_usuario.trim()) {
-      alert('Por favor ingresa tu nombre de usuario');
+      this.alertService.error('Por favor ingresa tu nombre de usuario');
       return;
     }
     if (!this.user.contrasena.trim()) {
-      alert('Por favor ingresa tu contraseña');
+      this.alertService.error('Por favor ingresa tu contraseña');
       return;
     }
 
     // Validar Captcha
     if (!this.validateCaptcha()) {
-      alert('Respuesta del Captcha incorrecta. Intenta de nuevo.');
+      this.alertService.error('Respuesta del Captcha incorrecta. Intenta de nuevo.');
       this.generateCaptcha();
       return;
     }
-    console.log(this.user);
-    this.authService.logIn(this.user).subscribe((response) => {
 
-      console.log("response", response);
-      alert('¡Bienvenido, ' + this.user.nombre_usuario + '!');
-      // Aquí redirigirías al menú de administración
-      // this.router.navigate(['/menu']);
+
+    this.authService.logIn(this.user).subscribe((response: any) => {
+
+      if (response) {
+        this.alertService.success('¡Bienvenido, ' + this.user.nombre_usuario + '!');
+        this.router.navigate(['/admin/menu']);
+      } else {
+        this.alertService.error('Credenciales incorrectas. Intenta de nuevo.');
+        this.generateCaptcha();
+      }
     });
-    // Simular autenticación (Credenciales: admin / admin123)
-    // if (this.user.nombre === 'admin' && this.user.contrasena === 'admin123') {
-    //   alert('¡Bienvenido, Administrador!');
-    //   // Aquí redirigirías al menú de administración
-    //   // this.router.navigate(['/menu']);
-    //   this.generateCaptcha(); // Regenerar captcha para seguridad
-    // } else {
-    //   alert('Credenciales incorrectas. Intenta de nuevo.');
-    //   this.generateCaptcha(); // Regenerar captcha si falla
-    // }
   }
 }

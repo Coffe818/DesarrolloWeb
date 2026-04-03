@@ -34,5 +34,29 @@ export class UtilService {
         return this.EMAIL_REGEX.test(email);
     }
 
+    //Formato json
+    buildBody(data: any, fields: string[]): any {
+        const body: any = {};
+        fields.forEach(field => {
+            if (data[field] !== undefined) {
+                body[field] = data[field];
+            }
+        });
+        return body;
+    }
+
+    buildQueryParams(data: any, fields: string[]): string {
+        const params = new URLSearchParams();
+
+        fields.forEach(field => {
+            if (data[field] !== undefined && data[field] !== null && data[field] !== '' && data[field] !== 0) {
+                params.append(field, data[field]);
+            }
+        });
+
+        const queryString = params.toString();
+        return queryString ? `?${queryString}` : '';
+    }
+
 
 }

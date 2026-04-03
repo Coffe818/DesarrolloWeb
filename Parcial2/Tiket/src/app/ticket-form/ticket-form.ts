@@ -1,28 +1,30 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { Ticket } from '../../models/tiket.model';
-import { TiketService } from '../../service/TiketService.service';
-import { AlertService } from '../../service/AlertService.service';
-import { MunicipioService } from '../../service/MunicipioService.service';
-import { NivelEstudioService } from '../../service/NivelEstudioService.service';
-import { UtilService } from '../../service/UtilService.service';
+import { Router } from '@angular/router';
+import { Ticket } from '../../shared/models/ticket.model';
+import { TicketService } from '../../shared/service/TicketService.service';
+import { AlertService } from '../../shared/service/AlertService.service';
+import { MunicipioService } from '../../shared/service/MunicipioService.service';
+import { NivelEstudioService } from '../../shared/service/NivelEstudioService.service';
+import { UtilService } from '../../shared/service/UtilService.service';
+import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 
 @Component({
-  selector: 'app-tiket-form',
+  selector: 'app-ticket-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './tiket-form.html',
-  styleUrl: './tiket-form.css',
+  imports: [CommonModule, FormsModule, PageHeaderComponent],
+  templateUrl: './ticket-form.html',
+  styleUrl: './ticket-form.css',
 })
-export class TiketForm {
-  ticketService = inject(TiketService);
+export class TicketForm {
+  ticketService = inject(TicketService);
   alertService = inject(AlertService);
   municipioService = inject(MunicipioService);
   nivelService = inject(NivelEstudioService);
   utilService = inject(UtilService);
   cdr = inject(ChangeDetectorRef);
+  router = inject(Router);
 
   activeTab: 'nuevo' | 'editar' = 'nuevo';
   ticket: Ticket = new Ticket();
@@ -33,6 +35,19 @@ export class TiketForm {
 
   editando = false;
 
+
+  constructor() {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { ticketToEdit: Ticket };
+
+    if (state?.ticketToEdit) {
+      this.ticketBusqueda = state.ticketToEdit;
+      this.editando = true;
+      console.log('Ticket recibido para edición:', this.ticketBusqueda);
+      this.consultarTicket();
+      this.setActiveTab('nuevo');
+    }
+  }
 
   setActiveTab(tab: 'nuevo' | 'editar') {
     this.activeTab = tab;
@@ -108,7 +123,7 @@ export class TiketForm {
 
     if (!this.validarTicket()) return;
 
-    this.ticketService.TiketSave(this.ticket).subscribe((response: Ticket) => {
+    this.ticketService.TicketSave(this.ticket).subscribe((response: Ticket) => {
       this.alertService.success('¡Ticket registrado exitosamente!');
       this.ticketBusqueda.curp = this.ticket.curp;
       this.ticketBusqueda.turno = response.turno;
@@ -134,7 +149,7 @@ export class TiketForm {
     if (!this.validarTicketBusqueda()) return;
     this.ticket = new Ticket();
 
-    this.ticketService.TicketGetFilter(this.ticketBusqueda).subscribe((tickets: Ticket[]) => {
+    this.ticketService.TicketGetFilter(this.ticketBusqueda, ['curp', 'turno']).subscribe((tickets: Ticket[]) => {
       if (tickets.length > 0) {
 
         const ticketEncontrado = tickets[0];

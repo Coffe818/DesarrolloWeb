@@ -9,13 +9,9 @@ import { HttpService } from './HttpService.service';
 })
 
 export class NivelEstudioService {
-
     private httpService = inject(HttpService);
-
     private _nivelesEstudios = signal<string[]>([]);
-
     public nivelesEstudios = computed(() => this._nivelesEstudios());
-
     private cargando = false;
 
     constructor() {
@@ -31,7 +27,6 @@ export class NivelEstudioService {
             map(response => response as string[]),
             tap(data => {
                 this._nivelesEstudios.set(data);
-                console.log('Niveles de estudio cargados:', this._nivelesEstudios());
                 this.cargando = false;
             }),
             tap({ error: () => this.cargando = false })

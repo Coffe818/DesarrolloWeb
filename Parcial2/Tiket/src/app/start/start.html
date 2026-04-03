@@ -16,13 +16,13 @@
 
     <!-- Botones de Acción (Stackeados en Mobile, Fila en Desktop) -->
     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-      <button routerLink="/crear-tiket"
+      <button routerLink="/crear-ticket"
         class="btn btn-primary btn-lg px-4 py-3 shadow-sm d-flex align-items-center justify-content-center">
         <span class="material-icons me-2">add_circle</span>
         Sacar Nuevo Ticket
       </button>
 
-      <button routerLink="/login"
+      <button (click)="adminAccess()"
         class="btn btn-outline-primary btn-lg px-4 py-3 d-flex align-items-center justify-content-center">
         <span class="material-icons me-2">admin_panel_settings</span>
         Acceso Administrador
@@ -31,7 +31,7 @@
 
     <!-- Footer Simple -->
     <div class="mt-5 pt-4 border-top">
-      <small class="text-muted">© 2026 Tiket - Gobierno de Coahuila</small>
+      <small class="text-muted">© 2026 Ticket - Gobierno de Coahuila</small>
     </div>
   </div>
 </div>
