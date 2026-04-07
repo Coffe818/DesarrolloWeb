@@ -1,63 +1,68 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TicketService } from '../../shared/service/TicketService.service';
 import { Ticket } from '../../shared/models/ticket.model';
 import { AlertService } from '../../shared/service/AlertService.service';
-import { MunicipioService } from '../../shared/service/MunicipioService.service';
 import { NivelEstudioService } from '../../shared/service/NivelEstudioService.service';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
-import { UtilService } from '../../shared/service/UtilService.service';
-
-
+import { MunicipioSearchComponent } from '../../shared/components/municipio-search/municipio-search';
 
 @Component({
   selector: 'app-admin-tickets',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageHeaderComponent],
+  imports: [CommonModule, FormsModule, PageHeaderComponent, MunicipioSearchComponent],
   templateUrl: './admin-tickets.html',
   styleUrl: './admin-tickets.css'
 })
-export class AdminTickets implements OnInit {
-  utilService = inject(UtilService);
+export class AdminTickets {
   ticketService = inject(TicketService);
   alertService = inject(AlertService);
   router = inject(Router);
-  municipioService = inject(MunicipioService);
   nivelService = inject(NivelEstudioService);
-  municipiosName = this.municipioService.municipiosNames
-  nivelesEstudios = this.nivelService.nivelesEstudios
+  
+  nivelesEstudios = this.nivelService.nivelesEstudios;
 
-  ticketsList: Ticket[] = [];
-  filterTicket: Ticket = new Ticket();
+  // Signals de paginación del servicio
+  currentPage = computed(() => this.ticketService.currentPage());
+  totalPages = computed(() => this.ticketService.totalPages());
+  totalCount = computed(() => this.ticketService.totalCount());
 
-  ngOnInit() {
-    this.filterTicket.estatus_ticket = ''
-    this.filterTicket.ticket_id = undefined
-    this.filterTicket.turno = undefined
-    this.buscarTickets();
-  }
+  // Signals para filtros
+  filterTicketId = signal<string>('');
+  filterTurno = signal<string>('');
+  filterCurp = signal<string>('');
+  filterNombre = signal<string>('');
+  filterMunicipio = signal<string>('');
+  filterNivelEstudios = signal<string>('');
+  filterEstatusTicket = signal<string>('');
 
+  // Lista de tickets del servicio
+  ticketsList = computed(() => this.ticketService.tickets());
 
   buscarTickets() {
-    const campos = ['ticket_id', 'turno', 'curp', 'nombre', 'municipio', 'nivel_estudios', 'estatus_ticket'];
-    this.ticketService.TicketGetFilter(this.filterTicket, campos).subscribe({
-      next: (tickets) => {
-        this.ticketsList = [...tickets];
-      },
-      error: (err) => {
-        this.alertService.error('Error al cargar los tickets: ' + err.message);
-      }
-    });
+    const filtros = {
+      ticket_id: this.filterTicketId(),
+      turno: this.filterTurno() ? Number(this.filterTurno()) : undefined,
+      curp: this.filterCurp(),
+      nombre: this.filterNombre(),
+      municipio: this.filterMunicipio(),
+      nivel_estudios: this.filterNivelEstudios(),
+      estatus_ticket: this.filterEstatusTicket()
+    };
+    this.ticketService.cargarTickets(1, filtros);
   }
 
   resetFilters() {
-    this.filterTicket = new Ticket()
-    this.filterTicket.estatus_ticket = ''
-    this.filterTicket.ticket_id = undefined
-    this.filterTicket.turno = undefined
-    this.refreshTikets();
+    this.filterTicketId.set('');
+    this.filterTurno.set('');
+    this.filterCurp.set('');
+    this.filterNombre.set('');
+    this.filterMunicipio.set('');
+    this.filterNivelEstudios.set('');
+    this.filterEstatusTicket.set('');
+    this.ticketService.cargarTickets(1);
   }
 
   editTicket(ticket: Ticket) {
@@ -68,9 +73,9 @@ export class AdminTickets implements OnInit {
 
   gestionarTicket(ticket: Ticket) {
     this.ticketService.TicketGestionar(ticket).subscribe({
-      next: (response) => {
-        this.alertService.success(`Ticket ${response.ticket_id} gestionado exitosamente.`);
-        this.refreshTikets();
+      next: () => {
+        this.alertService.success(`Ticket ${ticket.ticket_id} gestionado exitosamente.`);
+        this.buscarTickets();
       },
       error: (err) => {
         this.alertService.error('Error al gestionar el ticket: ' + err.message);
@@ -84,7 +89,7 @@ export class AdminTickets implements OnInit {
         this.ticketService.TicketDelete(ticket.ticket_id!).subscribe({
           next: () => {
             this.alertService.success(`Ticket ${ticket.ticket_id} eliminado exitosamente.`);
-            this.refreshTikets();
+            this.buscarTickets();
           },
           error: (err) => {
             this.alertService.error('Error al eliminar el ticket: ' + err.message);
@@ -94,11 +99,52 @@ export class AdminTickets implements OnInit {
     });
   }
 
-  refreshTikets() {
-    this.utilService.startLoading();
-    setTimeout(() => {
-      this.utilService.stopLoading();
-      this.buscarTickets();
-    }, 500);
+  // Navegación de paginación
+  goToPage(page: number) {
+    const filtros = {
+      ticket_id: this.filterTicketId(),
+      turno: this.filterTurno() ? Number(this.filterTurno()) : undefined,
+      curp: this.filterCurp(),
+      nombre: this.filterNombre(),
+      municipio: this.filterMunicipio(),
+      nivel_estudios: this.filterNivelEstudios(),
+      estatus_ticket: this.filterEstatusTicket()
+    };
+    this.ticketService.cargarTickets(page, filtros);
+  }
+
+  nextPage() {
+    const filtros = {
+      ticket_id: this.filterTicketId(),
+      turno: this.filterTurno() ? Number(this.filterTurno()) : undefined,
+      curp: this.filterCurp(),
+      nombre: this.filterNombre(),
+      municipio: this.filterMunicipio(),
+      nivel_estudios: this.filterNivelEstudios(),
+      estatus_ticket: this.filterEstatusTicket()
+    };
+    this.ticketService.cargarTickets(this.currentPage() + 1, filtros);
+  }
+
+  prevPage() {
+    const filtros = {
+      ticket_id: this.filterTicketId(),
+      turno: this.filterTurno() ? Number(this.filterTurno()) : undefined,
+      curp: this.filterCurp(),
+      nombre: this.filterNombre(),
+      municipio: this.filterMunicipio(),
+      nivel_estudios: this.filterNivelEstudios(),
+      estatus_ticket: this.filterEstatusTicket()
+    };
+    this.ticketService.cargarTickets(this.currentPage() - 1, filtros);
+  }
+
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    const total = this.totalPages();
+    for (let i = 1; i <= total; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 }

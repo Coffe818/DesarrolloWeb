@@ -1,0 +1,208 @@
+<div class="container-fluid py-4">
+  <app-page-header title="Catálogo de Municipios"></app-page-header>
+
+  <!-- Filtros de Búsqueda -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-light">
+      <h5 class="m-0 d-flex align-items-center">
+        <span class="material-icons me-2">filter_list</span>
+        Filtros de Búsqueda
+      </h5>
+    </div>
+    <div class="card-body">
+      <div class="d-flex flex-wrap align-items-end gap-3">
+
+        <!-- Filtro Nombre de Municipio -->
+        <div style="flex: 1; min-width: 15rem;">
+          <label for="filterNombre" class="form-label fw-bold small">Municipio: </label>
+          <input type="text" [ngModel]="filterNombre()" (ngModelChange)="filterNombre.set($event)" 
+                 name="filterNombre" id="filterNombre" class="form-control"
+                 placeholder="Buscar por nombre...">
+        </div>
+
+        <!-- Botón Crear Nuevo -->
+        <div style="min-width: 200px;">
+          <button class="btn btn-success w-100" (click)="abrirModalCrear()" data-bs-toggle="modal"
+            data-bs-target="#modalMunicipio">
+            <span class="d-flex align-items-center justify-content-center">
+              <span class="material-icons me-1" style="font-size: 18px;">add</span>
+              Nuevo Municipio
+            </span>
+          </button>
+        </div>
+
+        <!-- Botón Limpiar -->
+        <div style="min-width: 150px;">
+          <button class="btn btn-outline-secondary w-100" (click)="resetFilters()">
+            <span class="d-flex align-items-center justify-content-center">
+              <span class="material-icons me-1" style="font-size: 18px;">backspace</span>
+              Limpiar
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla para Desktop (visible en pantallas grandes) -->
+  <div class="card shadow-sm d-none d-lg-block">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Nombre</th>
+              <th>Estado</th>
+              <th>Tickets</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (municipio of filteredMunicipios(); track municipio.nombre) {
+            <tr>
+              <td>{{ municipio.nombre }}</td>
+              <td>{{ municipio.estado }}</td>
+              <td>{{ municipio.contador_tickets }}</td>
+              <td class="text-center">
+                <div class="btn-group" role="group">
+                  <button class="btn btn-md btn-outline-primary" (click)="abrirModalEditar(municipio)"
+                    data-bs-toggle="modal" data-bs-target="#modalMunicipio" title="Editar">
+                    <span class="material-icons">edit</span>
+                  </button>
+                  <button class="btn btn-md btn-outline-danger" (click)="deleteMunicipio(municipio)" title="Eliminar">
+                    <span class="material-icons">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="4" class="text-center py-4 text-muted">No se encontraron municipios.</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Paginación -->
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <small class="text-muted">Total: {{ totalCount() }} municipios</small>
+        <nav aria-label="Paginación de municipios">
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item" [class.disabled]="currentPage() === 1">
+              <button class="page-link" (click)="prevPage()" [disabled]="currentPage() === 1">
+                <span class="material-icons" style="font-size: 18px;">chevron_left</span>
+              </button>
+            </li>
+            @for (page of getPageNumbers(); track page) {
+              <li class="page-item" [class.active]="currentPage() === page">
+                <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+              </li>
+            }
+            <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+              <button class="page-link" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+                <span class="material-icons" style="font-size: 18px;">chevron_right</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acordeón para Móvil (visible en pantallas pequeñas) -->
+  <div class="accordion accordion-flush d-lg-none shadow-sm border-top" id="accordionMunicipios">
+    @for (municipio of filteredMunicipios(); track municipio.nombre; let i = $index) {
+    <div class="accordion-item">
+      <h2 class="accordion-header" [id]="'heading' + i">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+          <div class="d-flex flex-column w-100">
+            <span class="fw-bold">{{ municipio.nombre }}</span>
+            <small class="text-muted">Tickets: {{ municipio.contador_tickets }}</small>
+          </div>
+        </button>
+      </h2>
+
+      <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionMunicipios">
+        <div class="accordion-body bg-light text-secondary" style="font-size: 0.9rem;">
+          <p class="mb-1"><strong>Estado:</strong> {{ municipio.estado }}</p>
+          <p class="mb-1"><strong>Tickets Totales:</strong> {{ municipio.contador_tickets }}</p>
+
+          <div class="d-flex flex-wrap justify-content-evenly gap-2 mt-3 pt-3 border-top">
+            <button class="btn btn-outline-primary d-flex flex-grow-1 align-items-center justify-content-center"
+              (click)="abrirModalEditar(municipio)" data-bs-toggle="modal" data-bs-target="#modalMunicipio">
+              <span class="material-icons me-2">edit</span> Editar
+            </button>
+
+            <button class="btn btn-outline-danger d-flex flex-grow-1 align-items-center justify-content-center"
+              (click)="deleteMunicipio(municipio)">
+              <span class="material-icons me-2">delete</span> Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    } @empty {
+    <div class="p-4 text-center text-muted bg-white">
+      No se encontraron municipios.
+    </div>
+    }
+
+    <!-- Paginación Móvil -->
+    <div class="p-3 bg-light border-top">
+      <small class="text-muted d-block mb-2">Total: {{ totalCount() }} municipios - Página {{ currentPage() }} de {{ totalPages() }}</small>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-center" (click)="prevPage()" [disabled]="currentPage() === 1">
+          <span class="material-icons" style="font-size: 18px;">chevron_left</span>
+          Anterior
+        </button>
+        <button class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-center" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+          Siguiente
+          <span class="material-icons" style="font-size: 18px;">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Crear/Editar Municipio -->
+<div class="modal fade" id="modalMunicipio" tabindex="-1" aria-labelledby="modalMunicipioLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="modalMunicipioLabel">{{ modalTitulo }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="municipio_nombre" class="form-label fw-bold">Nombre del Municipio</label>
+          <input type="text" [(ngModel)]="modalMunicipio.nombre" class="form-control" id="municipio_nombre"
+            placeholder="Ingrese nombre del municipio">
+        </div>
+        <div class="mb-3">
+          <label for="municipio_estado" class="form-label fw-bold">Estado</label>
+          <input type="text" [(ngModel)]="modalMunicipio.estado" class="form-control" id="municipio_estado"
+            placeholder="Ingrese estado">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        @if (modalTitulo === 'Nuevo Municipio') {
+        <button type="button" class="btn btn-success d-flex align-items-center justify-content-center"
+          (click)="guardarNuevoMunicipio()">
+          <span class="material-icons me-1">save</span>
+          Crear
+        </button>
+        } @else {
+        <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center"
+          (click)="guardarEdicionMunicipio()">
+          <span class="material-icons me-1">save</span>
+          Guardar Cambios
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

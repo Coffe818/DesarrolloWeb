@@ -7,4 +7,7 @@ export const routes: Routes = [
   { path: 'crear-ticket', loadComponent: () => import('./ticket-form/ticket-form').then(m => m.TicketForm) },
   { path: 'admin/menu', loadComponent: () => import('./admin/admin-menu').then(m => m.AdminMenu) },
   { path: 'admin/tickets', loadComponent: () => import('./admin-tickets/admin-tickets').then(m => m.AdminTickets) },
+  { path: 'admin/catalogos', loadComponent: () => import('./admin-catalogos/admin-catalogos').then(m => m.AdminCatalogos) },
+  { path: 'admin/catalogo/administradores', loadComponent: () => import('./admin-catalogo-administrador/admin-catalogo-administrador').then(m => m.AdminCatalogoAdministrador) },
+  { path: 'admin/catalogo/municipios', loadComponent: () => import('./admin-catalogo-municipio/admin-catalogo-municipio').then(m => m.AdminCatalogoMunicipio) },
 ];

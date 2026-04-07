@@ -1,0 +1,46 @@
+<div class="municipio-search-container" [class.disabled]="disabled()">
+  <div class="input-group">
+    <span class="input-group-text">
+      <span class="material-icons">search</span>
+    </span>
+    <input 
+      type="text" 
+      class="form-control" 
+      [placeholder]="allMunicipios().length > 0 ? 'Buscar municipio...' : 'Cargando municipios...'"
+      [ngModel]="searchText()" 
+      (ngModelChange)="onSearchChange($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      [disabled]="disabled()"
+      autocomplete="off"
+    >
+    @if (searchText()) {
+      <button class="btn btn-outline-secondary" type="button" (click)="clearSelection()">
+        <span class="material-icons">close</span>
+      </button>
+    }
+  </div>
+  
+  @if (isOpen()) {
+    <ul class="dropdown-menu show w-100 mt-1 shadow" (mousedown)="onDropdownClick($event)">
+      @if (filteredMunicipios().length > 0) {
+        @for (municipio of filteredMunicipios(); track municipio.nombre) {
+          <li>
+            <button class="dropdown-item" type="button" (click)="selectMunicipio(municipio)">
+              <span class="material-icons me-2">location_city</span>
+              {{ municipio.nombre }}
+              <small class="text-muted ms-2">{{ municipio.estado }}</small>
+            </button>
+          </li>
+        }
+      } @else {
+        <li>
+          <span class="dropdown-item text-muted">
+            <span class="material-icons me-2">search_off</span>
+            No se encontraron municipios
+          </span>
+        </li>
+      }
+    </ul>
+  }
+</div>

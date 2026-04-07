@@ -1,0 +1,66 @@
+.municipio-search-container {
+  position: relative;
+}
+
+.municipio-search-container .input-group-text {
+  background-color: var(--bs-secondary-bg);
+  border-right: none;
+}
+
+.municipio-search-container .form-control {
+  border-left: none;
+}
+
+.municipio-search-container .form-control:focus {
+  border-color: var(--bs-primary);
+  box-shadow: none;
+}
+
+.municipio-search-container .input-group-text,
+.municipio-search-container .form-control {
+  border-color: var(--bs-border-color);
+}
+
+.dropdown-menu {
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1050;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-item .material-icons {
+  font-size: 1.2rem;
+  color: var(--bs-secondary-color);
+}
+
+.dropdown-item:hover .material-icons {
+  color: var(--bs-primary);
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Scrollbar personalizado para el dropdown */
+.dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background: var(--bs-secondary-bg);
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background: var(--bs-border-color);
+  border-radius: 3px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-secondary-color);
+}

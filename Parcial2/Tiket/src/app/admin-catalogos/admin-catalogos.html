@@ -1,0 +1,30 @@
+<div class="container py-4">
+  <!-- Botón Regresar y Título -->
+
+  <app-page-header title=""></app-page-header>
+
+
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Catálogos</h2>
+    <p class="text-muted">Bienvenido, administrador. ¿Qué catálogo desea acceder?</p>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    @for (option of adminOptions; track option.title) {
+    <div class="col">
+      <div class="card h-100 border-0 shadow-sm p-4 text-center hover-card" [routerLink]="option.route">
+        <div class="card-body">
+          <div class="mb-3">
+            <span class="material-icons {{option.color}}" style="font-size: 4rem;">{{ option.icon }}</span>
+          </div>
+          <h5 class="card-title fw-bold">{{ option.title }}</h5>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="text-center mt-5">
+    <button (click)="logout()" class="btn btn-outline-danger">Cerrar Sesión</button>
+  </div>
+</div>

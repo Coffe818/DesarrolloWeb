@@ -52,46 +52,46 @@
         <p class="text-muted">Llená el formulario para obtener tu turno.</p>
 
         <form>
-          <div class="mb-2">
+          <div class="mb-3">
             <label class="form-label">Nombre del que realiza</label>
-            <input [(ngModel)]="ticket.nombre_realiza" name="nombre_realiza" type="text" class="form-control">
+            <input [(ngModel)]="ticket.nombre_realiza" name="nombre_realiza" type="text" class="form-control" [readonly]="resuelto">
           </div>
-          <div class="mb-2">
+          <div class="mb-3">
             <label class="form-label">CURP</label>
-            <input [(ngModel)]="ticket.curp" name="curp" type="text" class="form-control" maxlength="18">
+            <input [(ngModel)]="ticket.curp" name="curp" type="text" class="form-control" maxlength="18" [readonly]="resuelto">
           </div>
-          <div class="mb-2">
+          <div class="mb-3">
             <label class="form-label">Nombre</label>
-            <input [(ngModel)]="ticket.nombre" name="nombre" type="text" class="form-control">
+            <input [(ngModel)]="ticket.nombre" name="nombre" type="text" class="form-control" [readonly]="resuelto">
           </div>
-          <div class="row">
-            <div class="col-6 mb-2">
+          <div class="d-flex flex-wrap gap-3">
+            <div class="flex-fill">
               <label class="form-label">Apellido Paterno</label>
-              <input [(ngModel)]="ticket.apellido_paterno" name="apellido_paterno" type="text" class="form-control">
+              <input [(ngModel)]="ticket.apellido_paterno" name="apellido_paterno" type="text" class="form-control" [readonly]="resuelto">
             </div>
-            <div class="col-6 mb-2">
+            <div class="flex-fill">
               <label class="form-label">Apellido Materno</label>
-              <input [(ngModel)]="ticket.apellido_materno" name="apellido_materno" type="text" class="form-control">
+              <input [(ngModel)]="ticket.apellido_materno" name="apellido_materno" type="text" class="form-control" [readonly]="resuelto">
             </div>
           </div>
-          <div class="row">
-            <div class="col-6 mb-2">
+          <div class="d-flex flex-wrap gap-3">
+            <div class="flex-fill">
               <label class="form-label">Teléfono</label>
-              <input [(ngModel)]="ticket.telefono" name="telefono" type="tel" class="form-control">
+              <input [(ngModel)]="ticket.telefono" name="telefono" type="tel" class="form-control" [readonly]="resuelto">
             </div>
-            <div class="col-6 mb-2">
+            <div class="flex-fill">
               <label class="form-label">Celular</label>
-              <input [(ngModel)]="ticket.celular" name="celular" type="tel" class="form-control">
+              <input [(ngModel)]="ticket.celular" name="celular" type="tel" class="form-control" [readonly]="resuelto">
             </div>
           </div>
-          <div class="mb-2">
+          <div class="mb-3">
             <label class="form-label">Correo</label>
-            <input [(ngModel)]="ticket.correo" name="correo" type="email" class="form-control">
+            <input [(ngModel)]="ticket.correo" name="correo" type="email" class="form-control" [readonly]="resuelto">
           </div>
-          <div class="row">
-            <div class="col-6 mb-2">
+          <div class="d-flex flex-wrap gap-3">
+            <div class="flex-fill">
               <label class="form-label">Nivel Estudios</label>
-              <select [(ngModel)]="ticket.nivel_estudios" name="nivel_estudios" class="form-select">
+              <select [(ngModel)]="ticket.nivel_estudios" name="nivel_estudios" class="form-select" [attr.disabled]="resuelto ? true : null">
                 <option value="">-- Seleccione --</option>
 
                 @for (nombre of nivelesEstudios(); track nombre) {
@@ -99,37 +99,35 @@
                 }
               </select>
             </div>
-            <div class="col-6 mb-2">
+            <div class="flex-fill">
               <label class="form-label">Municipio</label>
-              <select [(ngModel)]="ticket.municipio" name="municipio" class="form-select">
-                <option value="">-- Seleccione --</option>
-
-                @for (nombre of municipiosName(); track nombre) {
-                <option [value]="nombre">{{ nombre }}</option>
-                }
-              </select>
+              <app-municipio-search 
+                [value]="ticket.municipio" 
+                (municipioSelected)="ticket.municipio = $event"
+                [disabled]="resuelto">
+              </app-municipio-search>
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label">Asunto</label>
-            <textarea [(ngModel)]="ticket.asunto" name="asunto" class="form-control" rows="3"></textarea>
+            <textarea [(ngModel)]="ticket.asunto" name="asunto" class="form-control" rows="3" [readonly]="resuelto"></textarea>
           </div>
           @if(editando) {
-          <div class="row g-2">
-            <div [class]="ticket.estatus_ticket === 'PENDIENTE' ? 'col-12 col-md-6' : 'col-12'">
-              <button type="button" (click)="imprimirTicket()"
-                class="btn btn-outline-primary w-100 py-2 shadow-sm d-flex align-items-center justify-content-center">
-                <span class="material-icons align-middle me-1">print</span> Imprimir Ticket
-              </button>
-            </div>
-
-            @if (ticket.estatus_ticket === "PENDIENTE") {
-            <div class="col-12 col-md-6">
-              <button type="button" (click)="guardarTicket()"
-                class="btn btn-primary w-100 py-2 shadow-sm d-flex align-items-center justify-content-center">
-                <span class="material-icons align-middle me-1">save</span> Actualizar Ticket
-              </button>
-            </div>
+          <div class="d-flex flex-wrap gap-2">
+            @if (ticket.estatus_ticket === 'PENDIENTE') {
+            <button type="button" (click)="imprimirTicket()"
+              class="btn btn-outline-primary flex-fill py-2 shadow-sm d-flex align-items-center justify-content-center">
+              <span class="material-icons align-middle me-1">print</span> Imprimir Ticket
+            </button>
+            <button type="button" (click)="guardarTicket()"
+              class="btn btn-primary flex-fill py-2 shadow-sm d-flex align-items-center justify-content-center">
+              <span class="material-icons align-middle me-1">save</span> Actualizar Ticket
+            </button>
+            } @else {
+            <button type="button" (click)="imprimirTicket()"
+              class="btn btn-outline-primary w-100 py-2 shadow-sm d-flex align-items-center justify-content-center">
+              <span class="material-icons align-middle me-1">print</span> Imprimir Ticket
+            </button>
             }
           </div>
           } @else {

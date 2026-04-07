@@ -9,11 +9,12 @@ import { MunicipioService } from '../../shared/service/MunicipioService.service'
 import { NivelEstudioService } from '../../shared/service/NivelEstudioService.service';
 import { UtilService } from '../../shared/service/UtilService.service';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
+import { MunicipioSearchComponent } from '../../shared/components/municipio-search/municipio-search';
 
 @Component({
   selector: 'app-ticket-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageHeaderComponent],
+  imports: [CommonModule, FormsModule, PageHeaderComponent, MunicipioSearchComponent],
   templateUrl: './ticket-form.html',
   styleUrl: './ticket-form.css',
 })
@@ -34,7 +35,7 @@ export class TicketForm {
   nivelesEstudios = this.nivelService.nivelesEstudios
 
   editando = false;
-
+  resuelto = false;
 
   constructor() {
     const navigation = this.router.getCurrentNavigation();
@@ -127,6 +128,8 @@ export class TicketForm {
     this.ticketService.TicketSave(this.ticket).subscribe((response: Ticket) => {
       if (this.editando) {
         this.alertService.success('¡Ticket actualizado exitosamente!');
+        this.ticketBusqueda.curp = this.ticket.curp;
+        this.ticketBusqueda.turno = response.turno;
         this.consultarTicket();
         return;
       }
@@ -160,7 +163,7 @@ export class TicketForm {
 
         const ticketEncontrado = tickets[0];
         this.ticket = { ...ticketEncontrado, is_new: false };
-
+        this.resuelto = this.ticket.estatus_ticket === 'RESUELTO';
         console.log('Ticket encontrado:', this.ticket);
         this.alertService.success('¡Ticket encontrado! Puedes editar los datos.');
 

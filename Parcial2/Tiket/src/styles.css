@@ -21,6 +21,8 @@ body {
   font-size: 1.25rem;
 }
 
+
+
 @media (max-width: 768px) {
   .my-custom-toast {
     width: 90vw !important;
