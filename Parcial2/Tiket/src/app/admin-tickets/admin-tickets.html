@@ -120,8 +120,7 @@
               </td>
               <td class="text-center">
                 <div class="btn-group" role="group">
-                  <button class="btn btn-sm btn-outline-primary" [disabled]="ticket.estatus_ticket !== 'PENDIENTE'"
-                    (click)="editTicket(ticket)">
+                  <button class="btn btn-sm btn-outline-primary" (click)="editTicket(ticket)">
                     <span class="material-icons">edit</span>
                   </button>
                   <button class="btn btn-sm btn-outline-info" [disabled]="ticket.estatus_ticket !== 'PENDIENTE'"
@@ -174,8 +173,7 @@
           <p class="mb-1"><strong>Nivel de Estudios:</strong> {{ ticket.nivel_estudios }}</p>
 
           <div class="d-flex flex-wrap justify-content-evenly gap-2 mt-3 pt-3 border-top">
-            <button class="btn btn-outline-primary d-flex flex-grow-1 align-items-center justify-content-center"
-              [disabled]="ticket.estatus_ticket !== 'PENDIENTE'" (click)="editTicket(ticket)">
+            <button class="btn btn-outline-primary d-flex flex-grow-1 align-items-center justify-content-center" (click)="editTicket(ticket)">
               <span class="material-icons me-2">edit</span> Editar
             </button>
 

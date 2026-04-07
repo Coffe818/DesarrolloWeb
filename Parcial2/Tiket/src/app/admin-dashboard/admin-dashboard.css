@@ -1,0 +1,74 @@
+/* Cards de estadísticas */
+.icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box .material-icons {
+  font-size: 32px;
+}
+
+.icon-box.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Gráficos */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+.pastel-chart {
+  height: 300px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.bar-chart-vertical {
+  height: 300px;
+}
+
+.bar-chart-horizontal {
+  height: 400px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pastel-chart {
+    height: 250px;
+  }
+  
+  .bar-chart-vertical {
+    height: 250px;
+  }
+  
+  .bar-chart-horizontal {
+    height: 300px;
+  }
+}
+
+.pastel-chart {
+  height: 300px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.bar-chart {
+  height: 400px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pastel-chart {
+    height: 250px;
+  }
+  
+  .bar-chart {
+    height: 300px;
+  }
+}
