@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MunicipioService } from '../../service/MunicipioService.service';
@@ -42,21 +42,17 @@ export class MunicipioSearchComponent {
     return all.filter(m => m.nombre.toLowerCase().includes(search));
   });
 
-  // Mostrar todos los municipios al enfocar si no hay nada seleccionado
-  showAllOnFocus = computed(() => {
-    return this.searchText().length === 0;
-  });
-
   constructor() {
     // Cargar todos los municipios al iniciar
     this.municipioService.loadAllMunicipios();
-  }
-
-  ngOnInit() {
-    // Establecer valor inicial si viene del input
-    if (this.value()) {
-      this.searchText.set(this.value());
-    }
+    
+    // Effect para observar cambios en el input value
+    effect(() => {
+      const val = this.value();
+      if (val) {
+        this.searchText.set(val);
+      }
+    });
   }
 
   onSearchChange(value: string) {

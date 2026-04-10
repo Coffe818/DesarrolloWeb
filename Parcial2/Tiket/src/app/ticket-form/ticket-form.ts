@@ -37,6 +37,9 @@ export class TicketForm {
   editando = false;
   resuelto = false;
 
+  // Variable para el modal de preview (ya no se usa para PDF, pero el modal sigue)
+  showPreview = false;
+
   constructor() {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { ticketToEdit: Ticket };
@@ -150,8 +153,156 @@ export class TicketForm {
 
 
   }
-  imprimirTicket() {
 
+
+
+  
+
+  imprimirTicket() {
+    const t = this.ticket;
+    const printContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket #${t.turno}</title>
+  <style>
+    * { margin: 10px; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: Arial, sans-serif; 
+      padding: 15px; 
+      max-width: 100%; 
+      margin: 0 auto;
+      font-size: 11px;
+    }
+    
+    h1 { 
+      text-align: center; 
+      color: #0d6efd; 
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    
+    .hr { 
+      border-top: 2px solid #0d6efd; 
+      margin: 10px 0; 
+    }
+    
+    .turno { 
+      text-align: center; 
+      font-size: 32px; 
+      font-weight: bold; 
+      color: #0d6efd; 
+      margin: 15px 0 5px 0;
+    }
+    
+    .turno-label { 
+      text-align: center; 
+      color: #666; 
+      font-size: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .field { 
+      margin: 6px 0; 
+    }
+    
+    .label { 
+      color: #666; 
+      font-weight: bold;
+    }
+    
+    .divider { 
+      border-top: 1px dashed #ccc; 
+      margin: 10px 0; 
+    }
+    
+    .asunto { 
+      background: #f5f5f5; 
+      padding: 8px; 
+      border-radius: 3px; 
+      white-space: pre-wrap;
+      font-size: 10px;
+    }
+    
+    .footer { 
+      text-align: center; 
+      color: #666; 
+      font-size: 9px; 
+      margin-top: 15px;
+    }
+    
+    @page {
+      margin: 0.5cm;
+      size: auto;
+    }
+    
+    @media print {
+      body { 
+        padding: 0; 
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body onload="setTimeout(function(){ window.print(); window.close(); }, 100);">
+  <h1>TICKET DE ATENCIÓN</h1>
+  <div class="hr"></div>
+  
+  <div class="turno-label">TURNO</div>
+  <div class="turno">#${t.turno}</div>
+  <div class="hr"></div>
+  
+  <div class="field"><span class="label">Nombre:</span> ${t.nombre} ${t.apellido_paterno} ${t.apellido_materno}</div>
+  <div class="field"><span class="label">CURP:</span> ${t.curp}</div>
+  <div class="field"><span class="label">Fecha:</span> ${this.fechaActual}</div>
+  
+  <div class="divider"></div>
+  
+  <div class="field"><span class="label">Municipio:</span> ${t.municipio || 'No especificado'}</div>
+  <div class="field"><span class="label">Nivel Estudios:</span> ${t.nivel_estudios || 'No especificado'}</div>
+  
+  <div class="divider"></div>
+  
+  <div class="field"><span class="label">Asunto:</span></div>
+  <div class="asunto">${t.asunto || 'No especificado'}</div>
+  
+  <div class="divider"></div>
+  
+  <div class="field"><span class="label">Realizado por:</span> ${t.nombre_realiza || 'No especificado'}</div>
+  <div class="field"><span class="label">Teléfono:</span> ${t.telefono || 'No especificado'}</div>
+  
+  <div class="footer">
+    Fecha de impresión: ${this.fechaActual} - ${this.horaActual}
+  </div>
+</body>
+</html>
+    `;
+    
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(printContent);
+      printWindow.document.close();
+    } else {
+      this.alertService.error('No se pudo abrir la ventana de impresión');
+    }
+  }
+
+  get fechaActual(): string {
+    const now = new Date();
+    return now.toLocaleDateString('es-MX', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+
+  get horaActual(): string {
+    const now = new Date();
+    return now.toLocaleTimeString('es-MX', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   }
 
   consultarTicket() {

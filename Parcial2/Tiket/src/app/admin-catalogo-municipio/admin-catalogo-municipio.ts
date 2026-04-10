@@ -112,8 +112,8 @@ export class AdminCatalogoMunicipio implements OnInit {
       this.alertService.error('El estado es obligatorio.');
       return;
     }
-
-    this.municipioService.mubicipioUpdate(this.modalMunicipio).subscribe({
+    console.log('Guardando municipio editado:', this.modalMunicipio);
+    this.municipioService.municipioUpdate(this.modalMunicipio).subscribe({
       next: () => {
         this.alertService.success('Municipio actualizado exitosamente.');
         this.cerrarModal('modalMunicipio');
@@ -133,7 +133,7 @@ export class AdminCatalogoMunicipio implements OnInit {
     }
     this.alertService.confirm('Confirmar eliminación', `¿Estás seguro de que deseas eliminar el municipio de ${municipio.nombre}?`).then(confirmed => {
       if (confirmed) {
-        this.municipioService.municipioDelete(municipio.nombre!).subscribe({
+        this.municipioService.municipioDelete(municipio.id!).subscribe({
           next: () => {
             this.alertService.success(`Municipio ${municipio.nombre} eliminado exitosamente.`);
             this.municipioService.reloadMunicipios();

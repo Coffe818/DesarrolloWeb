@@ -122,8 +122,8 @@ export class MunicipioService {
         }
     }
 
-    municipioDelete(nombre: string) {
-        return this.httpService.delete(`/api/municipios/${nombre}/`, true);
+    municipioDelete(id: number) {
+        return this.httpService.delete(`/api/municipios/${id}/`, true);
     }
 
     municipioCreate(municipio: Municipio) {
@@ -134,11 +134,11 @@ export class MunicipioService {
         return this.httpService.post(`/api/municipios/`, body, true);
     }
 
-    mubicipioUpdate(municipio: Municipio) {
+    municipioUpdate(municipio: Municipio) {
         const body = {
             nombre: municipio.nombre,
             estado: municipio.estado,
         };
-        return this.httpService.put(`/api/municipios/${municipio.nombre}/`, body, true);
+        return this.httpService.put(`/api/municipios/${municipio.id}/`, body, true);
     }
 }

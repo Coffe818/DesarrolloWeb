@@ -64,10 +64,10 @@
                 <td>{{ admin.nombre_usuario }}</td>
                 <td>
                   <span class="badge" [ngClass]="{
-                    'bg-success': admin.token === 'ACTIVO',
-                    'bg-secondary': admin.token === 'INACTIVO'
+                    'bg-success': admin.token_activo === 'ACTIVO',
+                    'bg-secondary': admin.token_activo === 'INACTIVO'
                   }">
-                    {{ admin.token }}
+                    {{ admin.token_activo }}
                   </span>
                 </td>
                 <td class="text-center">
@@ -106,10 +106,10 @@
               <span class="fw-bold">{{ admin.nombre_usuario }}</span>
               <small>
                 <span class="badge" [ngClass]="{
-                  'bg-success': admin.token === 'ACTIVO',
-                  'bg-secondary': admin.token === 'INACTIVO'
+                  'bg-success': admin.token_activo === 'ACTIVO',
+                  'bg-secondary': admin.token_activo === 'INACTIVO'
                 }">
-                  {{ admin.token }}
+                  {{ admin.token_activo }}
                 </span>
               </small>
             </div>

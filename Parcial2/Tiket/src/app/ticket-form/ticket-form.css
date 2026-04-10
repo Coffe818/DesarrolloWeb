@@ -11,3 +11,87 @@
 .card {
     border-radius: 16px;
 }
+
+/* Estilos para el ticket de impresión */
+.ticket-preview {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ticket-container {
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.ticket-header {
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.turno-box {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: inline-block;
+    min-width: 150px;
+}
+
+.turno-box .text-muted {
+    color: rgba(255,255,255,0.8) !important;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.turno-number {
+    font-size: 48px;
+    font-weight: bold;
+    display: block;
+    line-height: 1;
+    margin-top: 5px;
+}
+
+.divider {
+    border-top: 1px dashed #dee2e6;
+    margin: 15px 0;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #6c757d;
+    min-width: 120px;
+}
+
+.info-value {
+    color: #212529;
+    text-align: right;
+    font-weight: 500;
+}
+
+.asunto-text {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #212529;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+.ticket-footer {
+    padding-top: 15px;
+    border-top: 2px solid #0d6efd;
+}
