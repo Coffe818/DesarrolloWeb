@@ -167,85 +167,104 @@ export class TicketForm {
   <meta charset="UTF-8">
   <title>Ticket #${t.turno}</title>
   <style>
-    * { margin: 10px; padding: 0; box-sizing: border-box; }
+    @page {
+      margin: 0;
+      size: 80mm auto;
+    }
+    
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    html, body {
+      width: 80mm;
+      margin: 0 auto;
+    }
+    
     body { 
       font-family: Arial, sans-serif; 
-      padding: 15px; 
-      max-width: 100%; 
-      margin: 0 auto;
-      font-size: 11px;
+      padding: 8px; 
+      font-size: 10px;
+      line-height: 1.3;
+      color: #000;
     }
     
     h1 { 
       text-align: center; 
-      color: #0d6efd; 
-      font-size: 16px;
-      margin-bottom: 8px;
+      color: #000; 
+      font-size: 14px;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
     
     .hr { 
-      border-top: 2px solid #0d6efd; 
-      margin: 10px 0; 
+      border-top: 1px solid #000; 
+      margin: 6px 0; 
     }
     
     .turno { 
       text-align: center; 
-      font-size: 32px; 
+      font-size: 24px; 
       font-weight: bold; 
-      color: #0d6efd; 
-      margin: 15px 0 5px 0;
+      margin: 8px 0 2px 0;
     }
     
     .turno-label { 
       text-align: center; 
-      color: #666; 
-      font-size: 10px;
-      margin-bottom: 10px;
+      color: #333; 
+      font-size: 9px;
+      margin-bottom: 6px;
     }
     
     .field { 
-      margin: 6px 0; 
+      margin: 3px 0; 
     }
     
     .label { 
-      color: #666; 
+      color: #333; 
       font-weight: bold;
     }
     
     .divider { 
-      border-top: 1px dashed #ccc; 
-      margin: 10px 0; 
+      border-top: 1px dashed #999; 
+      margin: 6px 0; 
     }
     
     .asunto { 
-      background: #f5f5f5; 
-      padding: 8px; 
-      border-radius: 3px; 
+      background: #f0f0f0; 
+      padding: 4px; 
+      font-size: 9px;
       white-space: pre-wrap;
-      font-size: 10px;
+      text-align: justify;
     }
     
     .footer { 
       text-align: center; 
-      color: #666; 
-      font-size: 9px; 
-      margin-top: 15px;
-    }
-    
-    @page {
-      margin: 0.5cm;
-      size: auto;
+      color: #333; 
+      font-size: 8px; 
+      margin-top: 8px;
     }
     
     @media print {
-      body { 
-        padding: 0; 
+      @page {
         margin: 0;
+        size: 80mm auto;
+      }
+      
+      html, body {
+        width: 80mm;
+      }
+      
+      body { 
+        padding: 4px; 
+        font-size: 9px;
       }
     }
   </style>
 </head>
-<body onload="setTimeout(function(){ window.print(); window.close(); }, 100);">
+<body onload="setTimeout(function(){ window.print(); window.close(); }, 300);">
   <h1>TICKET DE ATENCIÓN</h1>
   <div class="hr"></div>
   
@@ -259,21 +278,21 @@ export class TicketForm {
   
   <div class="divider"></div>
   
-  <div class="field"><span class="label">Municipio:</span> ${t.municipio || 'No especificado'}</div>
-  <div class="field"><span class="label">Nivel Estudios:</span> ${t.nivel_estudios || 'No especificado'}</div>
+  <div class="field"><span class="label">Municipio:</span> ${t.municipio || '-'}</div>
+  <div class="field"><span class="label">Nivel:</span> ${t.nivel_estudios || '-'}</div>
   
   <div class="divider"></div>
   
   <div class="field"><span class="label">Asunto:</span></div>
-  <div class="asunto">${t.asunto || 'No especificado'}</div>
+  <div class="asunto">${t.asunto || '-'}</div>
   
   <div class="divider"></div>
   
-  <div class="field"><span class="label">Realizado por:</span> ${t.nombre_realiza || 'No especificado'}</div>
-  <div class="field"><span class="label">Teléfono:</span> ${t.telefono || 'No especificado'}</div>
+  <div class="field"><span class="label">Realizado Por:</span> ${t.nombre_realiza || '-'}</div>
+  <div class="field"><span class="label">Tel:</span> ${t.telefono || '-'}</div>
   
   <div class="footer">
-    Fecha de impresión: ${this.fechaActual} - ${this.horaActual}
+    ${this.fechaActual} ${this.horaActual}
   </div>
 </body>
 </html>
