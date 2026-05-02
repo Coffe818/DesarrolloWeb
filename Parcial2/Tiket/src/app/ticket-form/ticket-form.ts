@@ -10,6 +10,7 @@ import { NivelEstudioService } from '../../shared/service/NivelEstudioService.se
 import { UtilService } from '../../shared/service/UtilService.service';
 import { PageHeaderComponent } from '../../shared/components/page-header/page-header';
 import { MunicipioSearchComponent } from '../../shared/components/municipio-search/municipio-search';
+import QRCode from 'qrcode';
 
 @Component({
   selector: 'app-ticket-form',
@@ -158,8 +159,27 @@ export class TicketForm {
 
   
 
-  imprimirTicket() {
+  async imprimirTicket() {
     const t = this.ticket;
+    
+    // Generar datos para el QR
+    const qrData = JSON.stringify({
+      turno: t.turno,
+      curp: t.curp,
+      nombre: `${t.nombre} ${t.apellido_paterno} ${t.apellido_materno}`,
+      fecha: this.fechaActual
+    });
+    
+    // Generar imagen QR como base64
+    const qrImage = await QRCode.toDataURL(qrData, {
+      width: 100,
+      margin: 1,
+      color: {
+        dark: '#000000',
+        light: '#ffffff'
+      }
+    });
+    
     const printContent = `
 <!DOCTYPE html>
 <html>
@@ -240,6 +260,16 @@ export class TicketForm {
       text-align: justify;
     }
     
+    .qr-container {
+      text-align: center;
+      margin: 10px 0;
+    }
+    
+    .qr-container img {
+      width: 80px;
+      height: 80px;
+    }
+    
     .footer { 
       text-align: center; 
       color: #333; 
@@ -290,6 +320,12 @@ export class TicketForm {
   
   <div class="field"><span class="label">Realizado Por:</span> ${t.nombre_realiza || '-'}</div>
   <div class="field"><span class="label">Tel:</span> ${t.telefono || '-'}</div>
+  
+  <div class="divider"></div>
+  
+  <div class="qr-container">
+    <img src="${qrImage}" alt="QR Code">
+  </div>
   
   <div class="footer">
     ${this.fechaActual} ${this.horaActual}

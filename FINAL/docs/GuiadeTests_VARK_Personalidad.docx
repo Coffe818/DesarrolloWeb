@@ -1,0 +1,479 @@
+# Guía Completa: Tests VARK y Personalidad Jung-Myers Briggs
+
+---
+
+## PARTE 1: EXPLICACIÓN DETALLADA DE CADA TEST
+
+---
+
+### TEST 1: VARK - Estilos de Aprendizaje
+
+#### ¿Qué es?
+El modelo VARK fue desarrollado por Neil Fleming en 1987. Es una herramienta que identifica cómo una persona prefiere recibir y procesar información. Las siglas representan:
+
+- V isual: Aprende mejor viendo gráficos, diagramas, imágenes, videos
+- A uditory: Aprende mejor escuchando, hablando, discutiendo
+- R ead/Write: Aprende mejor leyendo textos, escribiendo apuntes
+- K inesthetic: Aprende mejor haciendo, practicando, experimentando
+
+#### ¿Para qué sirve?
+- Para que estudiantes identifiquen su estilo de aprendizaje
+- Para que profesores adapten sus métodos de enseñanza
+- Para mejorar la eficiencia del estudio
+
+#### ¿Cómo se contesta?
+Cada pregunta tiene 4 opciones (una por cada estilo). Elegís la respuesta que mejor te represente. Podés marcar más de una respuesta si ninguna captura perfectly tu preference.
+
+#### ¿Cómo se calcula el resultado?
+Contás cuántas respuestas elegiste de cada tipo:
+
+```
+Resultados ejemplo:
+- V = 8 respuestas  → VISUAL (estilo dominante)
+- A = 3 respuestas
+- R = 2 respuestas
+- K = 3 respuestas
+
+Resultado: Eres VISUAL porque tienes más respuestas en esa categoría
+```
+
+Si tenés puntuaciones similares en 2 o más categorías (ej: V=6, A=5), eres multimodal (combinas varios estilos).
+
+#### Tipo de preguntas:
+Son situaciones de la vida real relacionadas con cómo preferís aprender o Gather información.
+
+---
+
+### TEST 2: PERSONALIDAD JUNG-MYERS BRIGGS
+
+#### ¿Qué es?
+Basado en la teoría de Carl Jung (1921) y desarrollado por Isabel Briggs Myers. Clasifica la personalidad en 16 tipos diferentes.
+
+#### Las 4 Dimensiones:
+
+| Letra | Par | Qué evalúa |
+|-------|-----|------------|
+| E | Extraversión | Tu energía va hacia el mundo externo (personas, actividades) |
+| I | Introversión | Tu energía va hacia el mundo interno (ideas, reflexión) |
+| S | Sensación | Te enfocás en datos concretos, detalles, hechos reales |
+| N | Intuición | Te enfocás en patrones, posibilidades, futuro |
+| T | Pensamiento | Decidís con lógica, análisis, objetividad |
+| F | Sentimiento | Decidís con valores, emociones, impacto en personas |
+| J | Juzgamiento | Vivís de manera estructurada, organizada, con planes |
+| P | Percepción | Vivís de manera flexible, espontánea, descubriendo cosas |
+
+#### ¿Cómo se determina el tipo?
+Tenés 4 letras. Ejemplo: INTJ
+
+I = Introvertido (dirección de energía)
+N = Intuición (cómo procesás información)
+T = Pensamiento (cómo tomás decisiones)
+J = Juzgamiento (cómo organizás tu vida)
+
+Esto significa: Una persona introvertida que procesa información intuitivamente, toma decisiones basadas en lógica, y vive de manera estructurada.
+
+#### ¿Cómo se contesta?
+Cada pregunta presenta dos opciones opuestas. Elegís la que más te represente.
+
+#### ¿Cómo se calcula?
+Cada dimensión tiene 8 preguntas. Sumás los valores (tipo Likert 1-5 o binario). Si la suma supera 24, es la segunda opción de la díada.
+
+---
+
+## PARTE 2: PREGUNTAS PARA EL TEST VARK
+
+### Instrucciones:
+Para cada situación, elegí la respuesta que mejor describa tu manera de aprender o preference. Podés marcar más de una respuesta si ninguna captura perfectly tu preference.
+
+---
+
+**Pregunta 1:**
+Estás ayudando a alguien a llegar a un lugar que nunca ha visitado. ¿Cómo le das las directions?
+
+a) Le dibuja un mapa en un papel (V)
+b) Le explicas verbalmente cómo llegar (A)
+c) Le escribes las direcciones en un papel con direcciones escritas (R)
+d) Lo llevas personalmente al lugar (K)
+
+**Pregunta 2:**
+Vas a comprar una cámara digital nueva. Además del precio, ¿qué influye más en tu decisión?
+
+a) Ver fotos de ejemplo que tomen otros usuarios (V)
+b) Que el vendedor te explique las características (A)
+c) Leer las especificaciones técnicas del manual (R)
+d) Probar la cámara en la tienda y ver cómo funciona (K)
+
+**Pregunta 3:**
+Estás aprendiendo un nuevo juego de mesa o carta. ¿Cómo lo aprendés mejor?
+
+a) Mirar videos tutoriales en YouTube (V)
+b) Que alguien te explique las reglas (A)
+c) Leer las instrucciones del juego (R)
+d) Empezar a jugar y aprender sobre la marcha (K)
+
+**Pregunta 4:**
+Terminaste un examen y quieres feedback. ¿Qué preferís?
+
+a) Recibir comentarios escritos sobre tus errores (R)
+b) Que alguien te explique verbalmente qué hiciste mal (A)
+c) Ver gráficos o estadísticas de tu rendimiento (V)
+d) Realizar ejercicios adicionales para practicar (K)
+
+**Pregunta 5:**
+Necesitás aprender a usar un nuevo programa de computadora. ¿Qué hacés?
+
+a) Buscar tutoriales en video (V)
+b) Buscar ayuda en foros de discusión (A)
+c) Leer la documentación o manual (R)
+d) Abrir el programa y experimentar directamente (K)
+
+**Pregunta 6:**
+Te han diagnósticado un problema de salud y tienes preguntas. ¿Qué hacés?
+
+a) Buscar información enInternet con diagrams (V)
+b) Hablar con el médico y hacerle preguntas (A)
+c) Leer artículos medical sobre el tema (R)
+d) Preguntar sobre opciones de tratamiento y qué esperar (K)
+
+**Pregunta 7:**
+Estás planeando unas vacaciones. ¿Qué información preferís recibir?
+
+a) Ver fotos y videos del destino (V)
+b) Que alguien que haya ido te cuente sobre su experiencia (A)
+c) Leer reseñas y opiniones escritas (R)
+d) Tener libertad para explorar sin itinerario fijo (K)
+
+**Pregunta 8:**
+En un sitio web quieres aprender algo nuevo. ¿Qué tipo de contenido preferís?
+
+a) Infografías y elementos visuales (V)
+b) Podcasts o contenido en audio (A)
+c) Artículos y textos explicativos (R)
+d) Actividades prácticas interactivas (K)
+
+**Pregunta 9:**
+Tienes que dar un discurso en un evento especial. ¿Qué haces para prepararte?
+
+a) Preparar diapositivas con elementos visuales (V)
+b) Ensayar speaking en voz alta (A)
+c) Escribir tu discurso completo y practicarlo (R)
+d) Pensar en los puntos kunci e improvisar durante la presentación (K)
+
+**Pregunta 10:**
+Estás en un restaurante nuevo. ¿Cómo elegís qué ordenar?
+
+a) Mirar las fotos del menú (V)
+b) Pedirle al mesero recomendaciones y explicaciones (A)
+c) Leer la descripción detallada de cada plato (R)
+d) Probar algo nuevo y diferente cada vez que vas (K)
+
+**Pregunta 11:**
+Quieres aprender mejor un tema académico. ¿Qué hacés?
+
+a) Usar mapas mentales y diagrams de colores (V)
+b) Grabar las clases y escucharlas después (A)
+c) Hacer resumenes y reapplications (R)
+d) Buscar formas de aplicar lo aprendido en la práctica (K)
+
+**Pregunta 12:**
+Tu amigo te recomienda un libro. ¿Cómo decidís si te gusta?
+
+a) Ver la portada y diseño del libro (V)
+b) Que alguien te cuente de qué trata (A)
+c) Leer la sinopsis o primeras páginas (R)
+d) Comenzar a leerlo y ver si te engancha (K)
+
+**Pregunta 13:**
+Necesitás encontrar información para un trabajo escolar. ¿Cómo la buscás?
+
+a) Buscar imágenes y gráficos relacionados (V)
+b) Ver videos documentales sobre el tema (A)
+c) Leer artículos y fuentes escritas (R)
+d) Hacer entrevistas o encuestas para collect datos (K)
+
+**Pregunta 14:**
+Estás aprendiendo a hacer algo práctico (como cocina o manualidades). ¿Qué hacés?
+
+a) Ver tutoriales en video paso a paso (V)
+b) Que alguien te explique mientras lo haces (A)
+c) Leer una receta o instrucciones escritas (R)
+d) Practicar directamente con tus manos (K)
+
+**Pregunta 15:**
+Prefieres un profesor o explicador que use...
+
+a) Presentaciones con slides y videos (V)
+b) Explicaciones orales y discusiones (A)
+c) Textos y lecturas para estudiar (R)
+d) Actividades pr��cticas y ejercicios (K)
+
+**Pregunta 16:**
+Cuando tienes que memorizar información para un examen, ¿qué hacés?
+
+a) Crear esquemas visuales y colores (V)
+b) Leer en voz alta y grabar tus notas (A)
+c) Escribir y releer tus apuntes (R)
+d) Crear tarjetas de práctica y physically (K)
+
+---
+
+### Clave de respuestas VARK:
+
+Cada respuesta corresponde a un estilo:
+- V = Visual
+- A = Auditivo
+- R = Read/Write
+- K = Kinestésico
+
+Cálculo: Cuenta cuántas respuestas tienes de cada tipo. El estilo con más respuestas es tu estilo dominante.
+
+---
+
+## PARTE 3: PREGUNTAS PARA EL TEST DE PERSONALIDAD (JUNG-MYERS BRIGGS)
+
+### Instrucciones:
+Para cada pregunta, elegí la opción que mejor te represente (A o B). No hay respuestas correctas o incorrectas.
+
+---
+
+### DIMENSIÓN 1: EXTRAVERSIÓN (E) vs INTROVERSIÓN (I)
+Dirección de energía: ¿Hacia dónde van tus energías?
+
+**Pregunta 1:**
+En una reunión social, tú usually:
+
+a) Eres el centro de la atención y hablas con muchos (E)
+b) Prefieres hablar con grupos pequeños o quedarte en un rincón (I)
+
+**Pregunta 2:**
+Después de un día agotador, preferís:
+
+a) Salir con amigos a divertirte (E)
+b) Estar solo/a en casa descansando (I)
+
+**Pregunta 3:**
+Para tomar decisiones importantes, prefieres:
+
+a) Discutirlas con otras personas (E)
+b) Pensarlas primero por tu cuenta (I)
+
+**Pregunta 4:**
+En una fiesta, tú acostumbras:
+
+a) Conocer gente nueva rápidamente (E)
+b) Quedarte con las personas que ya conoces (I)
+
+**Pregunta 5:**
+Cuando tienes un problema, usually:
+
+a) Lo compartilhás con others inmediatamente (E)
+b) Lo procesas internamente antes de hablar (I)
+
+**Pregunta 6:**
+Tu forma de comunicarse es:
+
+a) Hablar primero, pensar después (E)
+b) Pensar primero, hablar después (I)
+
+**Pregunta 7:**
+En el trabajo en equipo, prefieres:
+
+a) Reuniones y discusiones presenciales (E)
+b) Trabajar individualmente y luego compartir resultados (I)
+
+**Pregunta 8:**
+En situaciones sociales, usually:
+
+a) Iniciás las conversaciones (E)
+b) Esperás a que anderen te hablen primero (I)
+
+---
+
+### DIMENSIÓN 2: SENSACIÓN (S) vs INTUICIÓN (N)
+Procesamiento de información: ¿Cómo procesás la información?
+
+**Pregunta 9:**
+Cuando resolvé un problema, prefieres:
+
+a) Seguir pasos específicos y concretos (S)
+b) Buscar soluciones creativas e innovadoras (N)
+
+**Pregunta 10:**
+Confiás más en:
+
+a) La experiencia y los datos que knows (S)
+b) Tu intuición y corazonadas (N)
+
+**Pregunta 11:**
+Para aprender algo nuevo, necessitás:
+
+a) Ver ejemplos concretos y prácticas (S)
+b) Entender la teoría y el panorama general (N)
+
+**Pregunta 12:**
+Cuando leés un libro, prestás más atención a:
+
+a) Los datos y hechos presentados (S)
+b) Los significados y posibilidades que sugiere (N)
+
+**Pregunta 13:**
+En tu trabajo, sos mejor cuando:
+
+a) Sigues procedimientos establecidos (S)
+b) Encuentras formas nuevas de hacer las cosas (N)
+
+**Pregunta 14:**
+Te considerás:
+
+a) Una persona práctica y realista (S)
+b) Una persona con mucha imaginación (N)
+
+**Pregunta 15:**
+Cuando hay un problema, prefieres:
+
+a) Soluciones probadas y seguras (S)
+b) Soluciones originales y diferentes (N)
+
+**Pregunta 16:**
+Aprendés mejor cuando:
+
+a) Te dan instrucciones claras paso a paso (S)
+b) Puedes explorar y descubrir por tu cuenta (N)
+
+---
+
+### DIMENSIÓN 3: PENSAMIENTO (T) vs SENTIMIENTO (F)
+Toma de decisiones: ¿Cómo tomás decisiones?
+
+**Pregunta 17:**
+Cuando hay un conflicto, priorizás:
+
+a) Ser justo y objetivo, aunque sea difícil (T)
+b) Considerar cómo afectan los sentimientos de todos (F)
+
+**Pregunta 18:**
+Al tomar decisiones importantes, te basás más en:
+
+a) Lógica y análisis objetivo (T)
+b) Tus valores personales y emociones (F)
+
+**Pregunta 19:**
+Te considerás más:
+
+a) Una persona lógica y racional (T)
+b) Una persona empática y comprensiva (F)
+
+**Pregunta 20:**
+En una discusión, lo más importante es:
+
+a) Que los argumentos tengan sentido (T)
+b) Que todos se sientan escuchado y respetado (F)
+
+**Pregunta 21:**
+Cuando cometés un error, pensás:
+
+a) ¿Qué hice mal y cómo lo corrijo? (T)
+b) ¿Cómo se sintió la otra persona? (F)
+
+**Pregunta 22:**
+Te es más fácil dar:
+
+a) Crítica constructiva honesta (T)
+b) Apoyo emocional y comprensión (F)
+
+**Pregunta 23:**
+Para vos, es más importante:
+
+a) Ser competente y efectivo (T)
+b) Tener buenas relaciones con otros (F)
+
+**Pregunta 24:**
+En el trabajo, valorás más:
+
+a) Resultados y logros medibles (T)
+b) La armonía y el bienestar del equipo (F)
+
+---
+
+### DIMENSIÓN 4: JUZGAMIENTO (J) vs PERCEPCIÓN (P)
+Orientación de vida: ¿Cómo vivís tu vida?
+
+**Pregunta 25:**
+En tu diario, preferís:
+
+a) Tener un plan y seguirlo (J)
+b) Ser espontáneo y flexible (P)
+
+**Pregunta 26:**
+Cuando tenés una deadline:
+
+a) Lo terminaste mucho antes (J)
+b) Lo dejás para última hora (P)
+
+**Pregunta 27:**
+Tu escritorio/cuarto usually está:
+
+a) Organizado y limpio (J)
+b) Un poco caótico pero sabés dónde está todo (P)
+
+**Pregunta 28:**
+Ante cambios inesperados, reaction:
+
+a) Incomodo, prefiero lo planificado (J)
+b) Adaptable, lo tomo con natural (P)
+
+**Pregunta 29:**
+Para tomar decisiones, preferís:
+
+a) Tener toda la información de antemano (J)
+b) Mantenerte abierto a nuevas opciones (P)
+
+**Pregunta 30:**
+Te considerás:
+
+a) Una persona decisiva (J)
+b) Una persona abierta a posibilidades (P)
+
+**Pregunta 31:**
+En tu vida, valorás:
+
+a) La estructura y el orden (J)
+b) La libertad y la espontaneidad (P)
+
+**Pregunta 32:**
+Cuando empezás un proyecto:
+
+a) Haces un plan detallado primero (J)
+b) Lo vas desarrollando sobre la marcha (P)
+
+---
+
+### Cálculo del test de personalidad:
+
+Cada pregunta corresponde a una dimensión:
+
+- Preguntas 1-8: E (si elegiste a) o I (si elegiste b)
+- Preguntas 9-16: S (si elegiste a) o N (si elegiste b)
+- Preguntas 17-24: T (si elegiste a) o F (si elegiste b)
+- Preguntas 25-32: J (si elegiste a) o P (si elegiste b)
+
+Cálculo: Suma cuántos a elegiste en cada grupo de 8. Si tenés más de 4 a, es la primera opción de la díada.
+
+Tu resultado: Las 4 letras que resulten de cada dimensión (ej: ENTJ, ISFP, INFP, etc.)
+
+---
+
+## Los 16 Tipos de Personalidad
+
+| Analistas | Diplomáticos | Centinelas | Exploradores |
+|-----------|---------------|-------------|---------------|
+| INTJ | INFJ | ISTJ | ISTP |
+| INTP | INFP | ISFJ | ISFP |
+| ENTJ | ENFJ | ESTJ | ESTP |
+| ENTP | ENFP | ESFJ | ESFP |
+
+---
+
+*Documento creado para el proyecto "Aprendizaje VARK y Test de Personalidad"*
+*Universidad Autónoma de Coahuila - Semestre 9*
+*Desarrollo WEB

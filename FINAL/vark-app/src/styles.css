@@ -1,0 +1,434 @@
+/* 1. Import Bootstrap (must be first) */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* ============================================ */
+/* 🎨 CONFIGURACIÓN GLOBAL DE COLORES        */
+/* ============================================ */
+
+/* Transición suave para todos los cambios */
+body {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* ============================================ */
+/* 🔵 PALETA 0: BOOTSTRAP DEFAULT             */
+/* ============================================ */
+
+/* --- Light Mode (Clásico) --- */
+[data-palette="0"][data-bs-theme="light"],
+[data-palette="0"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #0d6efd;
+  --bs-primary-rgb: 13,110,253;
+  --bs-secondary: #6c757d;
+  --bs-secondary-rgb: 108,117,125;
+  --bs-success: #198754;
+  --bs-success-rgb: 25,135,84;
+  --bs-info: #0dcaf0;
+  --bs-info-rgb: 13,202,240;
+  --bs-warning: #ffc107;
+  --bs-warning-rgb: 255,193,7;
+  --bs-danger: #dc3545;
+  --bs-danger-rgb: 220,53,69;
+  --bs-light: #f8f9fa;
+  --bs-light-rgb: 248,249,250;
+  --bs-dark: #212529;
+  --bs-dark-rgb: 33,37,41;
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #212529;
+  --color-accent: #6f42c1; /* Púrpura de Bootstrap como acento */
+}
+
+/* --- Dark Mode (Oficial de Bootstrap) --- */
+[data-palette="0"][data-bs-theme="dark"] {
+  --bs-primary: #375a7f;       /* Tono azul optimizado para dark */
+  --bs-primary-rgb: 55,90,127;
+  --bs-secondary: #444444;
+  --bs-secondary-rgb: 68,68,68;
+  --bs-success: #00bc8c;
+  --bs-success-rgb: 0,188,140;
+  --bs-info: #3498db;
+  --bs-info-rgb: 52,152,219;
+  --bs-warning: #f39c12;
+  --bs-warning-rgb: 243,156,18;
+  --bs-danger: #e74c3c;
+  --bs-danger-rgb: 231,76,60;
+  --bs-light: #303030;         /* Fondo de tarjetas en Dark */
+  --bs-light-rgb: 48,48,48;
+  --bs-dark: #121212;          /* Fondo muy oscuro */
+  --bs-dark-rgb: 18,18,18;
+  --bs-body-bg: #222222;       /* Fondo principal Dark */
+  --bs-body-color: #ebebeb;
+  --color-accent: #e83e8c;
+}
+
+/* ============================================ */
+/* 🎨 PALETA 1: AZUL PROFESIONAL (Original)  */
+/* ============================================ */
+
+/* --- Light Mode --- */
+[data-palette="1"][data-bs-theme="light"],
+[data-palette="1"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #1E3A5F;
+  --bs-primary-rgb: 30,58,95;
+  --bs-secondary: #2A9D8F;
+  --bs-secondary-rgb: 42,157,143;
+  --bs-success: #52B788;
+  --bs-success-rgb: 82,183,136;
+  --bs-info: #457B9D;
+  --bs-info-rgb: 69,123,157;
+  --bs-warning: #E9C46A;
+  --bs-warning-rgb: 233,196,106;
+  --bs-danger: #E63946;
+  --bs-danger-rgb: 230,57,70;
+  --bs-light: #F8F9FA;
+  --bs-light-rgb: 248,249,250;
+  --bs-dark: #212529;
+  --bs-dark-rgb: 33,37,41;
+  --bs-body-bg: #F8F9FA;
+  --bs-body-color: #212529;
+  --color-accent: #E76F51;
+}
+
+/* --- Dark Mode --- */
+[data-palette="1"][data-bs-theme="dark"] {
+  --bs-primary: #4895EF;
+  --bs-primary-rgb: 72,149,239;
+  --bs-secondary: #56D4B5;
+  --bs-secondary-rgb: 86,212,181;
+  --bs-success: #74C69D;
+  --bs-success-rgb: 116,198,157;
+  --bs-info: #78C6F5;
+  --bs-info-rgb: 120,198,245;
+  --bs-warning: #F4D160;
+  --bs-warning-rgb: 244,209,96;
+  --bs-danger: #F28482;
+  --bs-danger-rgb: 242,132,130;
+  --bs-light: #415A77;
+  --bs-light-rgb: 65,90,119;
+  --bs-dark: #0D1B2A;
+  --bs-dark-rgb: 13,27,42;
+  --bs-body-bg: #0D1B2A;
+  --bs-body-color: #F8F9FA;
+  --color-accent: #F4A261;
+}
+
+/* ============================================ */
+/* 🌳 PALETA 2: NATURALEZA (Verde/Bosque)    */
+/* ============================================ */
+
+/* --- Light Mode --- */
+[data-palette="2"][data-bs-theme="light"],
+[data-palette="2"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #2D6A4F;
+  --bs-primary-rgb: 45,106,79;
+  --bs-secondary: #52B788;
+  --bs-secondary-rgb: 82,183,136;
+  --bs-success: #40916C;
+  --bs-success-rgb: 64,145,108;
+  --bs-info: #74C69D;
+  --bs-info-rgb: 116,198,157;
+  --bs-warning: #F77F00;
+  --bs-warning-rgb: 247,127,0;
+  --bs-danger: #D00000;
+  --bs-danger-rgb: 208,0,0;
+  --bs-light: #D8F3EA;
+  --bs-light-rgb: 216,243,234;
+  --bs-dark: #1B4332;
+  --bs-dark-rgb: 27,67,50;
+  --bs-body-bg: #D8F3EA;
+  --bs-body-color: #1B4332;
+  --color-accent: #F77F00;
+}
+
+/* --- Dark Mode --- */
+[data-palette="2"][data-bs-theme="dark"] {
+  --bs-primary: #95D5B2;
+  --bs-primary-rgb: 149,213,178;
+  --bs-secondary: #52B788;
+  --bs-secondary-rgb: 82,183,136;
+  --bs-success: #40916C;
+  --bs-success-rgb: 64,145,108;
+  --bs-info: #2D6A4F;
+  --bs-info-rgb: 45,106,79;
+  --bs-warning: #F77F00;
+  --bs-warning-rgb: 247,127,0;
+  --bs-danger: #FF6B6B;
+  --bs-danger-rgb: 255,107,107;
+  --bs-light: #1B4332;
+  --bs-light-rgb: 27,67,50;
+  --bs-dark: #081C15;
+  --bs-dark-rgb: 8,28,21;
+  --bs-body-bg: #081C15;
+  --bs-body-color: #D8F3EA;
+  --color-accent: #F77F00;
+}
+
+/* ============================================ */
+/* 🌅 PALETA 3: ATARDECER (Morado/Amarillo)  */
+/* ============================================ */
+
+/* --- Light Mode --- */
+[data-palette="3"][data-bs-theme="light"],
+[data-palette="3"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #6A0572;
+  --bs-primary-rgb: 106,5,114;
+  --bs-secondary: #AB83A9;
+  --bs-secondary-rgb: 171,131,169;
+  --bs-success: #A53860;
+  --bs-success-rgb: 165,56,96;
+  --bs-info: #3B008B;
+  --bs-info-rgb: 59,0,139;
+  --bs-warning: #FFBA49;
+  --bs-warning-rgb: 255,186,73;
+  --bs-danger: #C70039;
+  --bs-danger-rgb: 199,0,57;
+  --bs-light: #F8F9FA;
+  --bs-light-rgb: 248,249,250;
+  --bs-dark: #240046;
+  --bs-dark-rgb: 36,0,70;
+  --bs-body-bg: #F8F9FA;
+  --bs-body-color: #240046;
+  --color-accent: #FFBA49;
+}
+
+/* --- Dark Mode --- */
+[data-palette="3"][data-bs-theme="dark"] {
+  --bs-primary: #C060D8;
+  --bs-primary-rgb: 192,96,216;
+  --bs-secondary: #AB83A9;
+  --bs-secondary-rgb: 171,131,169;
+  --bs-success: #A53860;
+  --bs-success-rgb: 165,56,96;
+  --bs-info: #6A0572;
+  --bs-info-rgb: 106,5,114;
+  --bs-warning: #FFBA49;
+  --bs-warning-rgb: 255,186,73;
+  --bs-danger: #FF6B6B;
+  --bs-danger-rgb: 255,107,107;
+  --bs-light: #3B008B;
+  --bs-light-rgb: 59,0,139;
+  --bs-dark: #240046;
+  --bs-dark-rgb: 36,0,70;
+  --bs-body-bg: #240046;
+  --bs-body-color: #F8F9FA;
+  --color-accent: #FFBA49;
+}
+
+/* ============================================ */
+/* 🌊 PALETA 4: OCÉANO (Azul/Cyan)          */
+/* ============================================ */
+
+/* --- Light Mode --- */
+[data-palette="4"][data-bs-theme="light"],
+[data-palette="4"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #006D77;
+  --bs-primary-rgb: 0,109,119;
+  --bs-secondary: #83C5BE;
+  --bs-secondary-rgb: 131,197,190;
+  --bs-success: #EDF6F9;
+  --bs-success-rgb: 237,246,249;
+  --bs-info: #227C9D;
+  --bs-info-rgb: 34,124,157;
+  --bs-warning: #FFDDD2;
+  --bs-warning-rgb: 255,221,210;
+  --bs-danger: #E63946;
+  --bs-danger-rgb: 230,57,70;
+  --bs-light: #EDF6F9;
+  --bs-light-rgb: 237,246,249;
+  --bs-dark: #023047;
+  --bs-dark-rgb: 2,48,71;
+  --bs-body-bg: #EDF6F9;
+  --bs-body-color: #023047;
+  --color-accent: #E63946;
+}
+
+/* --- Dark Mode --- */
+[data-palette="4"][data-bs-theme="dark"] {
+  --bs-primary: #83C5BE;
+  --bs-primary-rgb: 131,197,190;
+  --bs-secondary: #006D77;
+  --bs-secondary-rgb: 0,109,119;
+  --bs-success: #227C9D;
+  --bs-success-rgb: 34,124,157;
+  --bs-info: #83C5BE;
+  --bs-info-rgb: 131,197,190;
+  --bs-warning: #FFDDD2;
+  --bs-warning-rgb: 255,221,210;
+  --bs-danger: #E63946;
+  --bs-danger-rgb: 230,57,70;
+  --bs-light: #023047;
+  --bs-light-rgb: 2,48,71;
+  --bs-dark: #012030;
+  --bs-dark-rgb: 1,32,48;
+  --bs-body-bg: #012030;
+  --bs-body-color: #EDF6F9;
+  --color-accent: #E63946;
+}
+
+/* ============================================ */
+/* 🏛️ PALETA 5: MINIMALISTA (Gris/Azul)    */
+/* ============================================ */
+
+/* --- Light Mode --- */
+[data-palette="5"][data-bs-theme="light"],
+[data-palette="5"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #3D405B;
+  --bs-primary-rgb: 61,64,91;
+  --bs-secondary: #81C3D7;
+  --bs-secondary-rgb: 129,195,215;
+  --bs-success: #81C3D7;
+  --bs-success-rgb: 129,195,215;
+  --bs-info: #3D405B;
+  --bs-info-rgb: 61,64,91;
+  --bs-warning: #E07A5F;
+  --bs-warning-rgb: 224,122,95;
+  --bs-danger: #D00000;
+  --bs-danger-rgb: 208,0,0;
+  --bs-light: #F8F9FA;
+  --bs-light-rgb: 248,249,250;
+  --bs-dark: #212529;
+  --bs-dark-rgb: 33,37,41;
+  --bs-body-bg: #F8F9FA;
+  --bs-body-color: #212529;
+  --color-accent: #E07A5F;
+}
+
+/* --- Dark Mode --- */
+[data-palette="5"][data-bs-theme="dark"] {
+  --bs-primary: #81C3D7;
+  --bs-primary-rgb: 129,195,215;
+  --bs-secondary: #3D405B;
+  --bs-secondary-rgb: 61,64,91;
+  --bs-success: #81C3D7;
+  --bs-success-rgb: 129,195,215;
+  --bs-info: #3D405B;
+  --bs-info-rgb: 61,64,91;
+  --bs-warning: #E07A5F;
+  --bs-warning-rgb: 224,122,95;
+  --bs-danger: #FF6B6B;
+  --bs-danger-rgb: 255,107,107;
+  --bs-light: #3D405B;
+  --bs-light-rgb: 61,64,91;
+  --bs-dark: #212529;
+  --bs-dark-rgb: 33,37,41;
+  --bs-body-bg: #212529;
+  --bs-body-color: #F8F9FA;
+  --color-accent: #E07A5F;
+}
+
+/* --- Light Mode (Nord Snow Storm) --- */
+[data-palette="6"][data-bs-theme="light"],
+[data-palette="6"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #5E81AC;
+  --bs-primary-rgb: 94,129,172;
+  --bs-secondary: #81A1C1;
+  --bs-secondary-rgb: 129,161,193;
+  --bs-success: #A3BE8C;
+  --bs-success-rgb: 163,190,140;
+  --bs-info: #88C0D0;
+  --bs-info-rgb: 136,192,208;
+  --bs-warning: #EBCB8B;
+  --bs-warning-rgb: 235,203,139;
+  --bs-danger: #BF616A;
+  --bs-danger-rgb: 191,97,106;
+  --bs-light: #E5E9F0;
+  --bs-light-rgb: 229,233,240;
+  --bs-dark: #2E3440;
+  --bs-dark-rgb: 46,52,64;
+  --bs-body-bg: #ECEFF4;
+  --bs-body-color: #2E3440;
+  --color-accent: #8FBCBB;
+}
+
+/* --- Dark Mode (Nord Polar Night) --- */
+[data-palette="6"][data-bs-theme="dark"] {
+  --bs-primary: #88C0D0;
+  --bs-primary-rgb: 136,192,208;
+  --bs-secondary: #81A1C1;
+  --bs-secondary-rgb: 129,161,193;
+  --bs-success: #A3BE8C;
+  --bs-success-rgb: 163,190,140;
+  --bs-info: #5E81AC;
+  --bs-info-rgb: 94,129,172;
+  --bs-warning: #EBCB8B;
+  --bs-warning-rgb: 235,203,139;
+  --bs-danger: #BF616A;
+  --bs-danger-rgb: 191,97,106;
+  --bs-light: #3B4252;
+  --bs-light-rgb: 59,66,82;
+  --bs-dark: #2E3440;
+  --bs-dark-rgb: 46,52,64;
+  --bs-body-bg: #2E3440;
+  --bs-body-color: #D8DEE9;
+  --color-accent: #8FBCBB;
+}
+
+/* --- Light Mode (Dracula Light / Soft) --- */
+[data-palette="7"][data-bs-theme="light"],
+[data-palette="7"]:root:not([data-bs-theme="dark"]) {
+  --bs-primary: #6272a4;
+  --bs-primary-rgb: 98,114,164;
+  --bs-secondary: #9b6bcd;
+  --bs-secondary-rgb: 155,107,205;
+  --bs-success: #50fa7b;
+  --bs-success-rgb: 80,250,123;
+  --bs-info: #8be9fd;
+  --bs-info-rgb: 139,233,253;
+  --bs-warning: #f1fa8c;
+  --bs-warning-rgb: 241,250,140;
+  --bs-danger: #ff5555;
+  --bs-danger-rgb: 255,85,85;
+  --bs-light: #f8f8f2;
+  --bs-light-rgb: 248,248,242;
+  --bs-dark: #282a36;
+  --bs-dark-rgb: 40,42,54;
+  --bs-body-bg: #f8f8f2;
+  --bs-body-color: #282a36;
+  --color-accent: #ff79c6;
+}
+
+/* --- Dark Mode (Dracula Official) --- */
+[data-palette="7"][data-bs-theme="dark"] {
+  --bs-primary: #bd93f9;
+  --bs-primary-rgb: 189,147,249;
+  --bs-secondary: #6272a4;
+  --bs-secondary-rgb: 98,114,164;
+  --bs-success: #50fa7b;
+  --bs-success-rgb: 80,250,123;
+  --bs-info: #8be9fd;
+  --bs-info-rgb: 139,233,253;
+  --bs-warning: #f1fa8c;
+  --bs-warning-rgb: 241,250,140;
+  --bs-danger: #ff5555;
+  --bs-danger-rgb: 255,85,85;
+  --bs-light: #44475a;
+  --bs-light-rgb: 68,71,90;
+  --bs-dark: #282a36;
+  --bs-dark-rgb: 40,42,54;
+  --bs-body-bg: #282a36;
+  --bs-body-color: #f8f8f2;
+  --color-accent: #ff79c6;
+}
+
+/* ============================================ */
+/* 🛠️ AJUSTES EXTRA PARA DARK MODE          */
+/* ============================================ */
+
+/* Ajuste para Cards en Dark Mode (usar el color light como fondo de tarjeta) */
+[data-bs-theme="dark"] .card {
+  background-color: var(--bs-light);
+  border-color: var(--bs-primary);
+  color: var(--bs-body-color);
+}
+
+/* Botón de Acento Personalizado */
+.btn-accent {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.btn-accent:hover {
+  opacity: 0.9;
+  color: #fff;
+}
