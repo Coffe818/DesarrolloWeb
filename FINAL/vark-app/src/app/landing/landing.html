@@ -1,11 +1,11 @@
-<app-nav-bar></app-nav-bar>
 
+<div class="container">
 <!-- HERO SECTION -->
-<section class="py-5">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6">
-        <h1 class="display-4 fw-bold mb-3">Descubre Tu Estilo de Aprendizaje y Personalidad</h1>
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1 class="display-6 fw-bold mb-3">Descubre Tu Estilo de Aprendizaje y Personalidad</h1>
         <p class="lead mb-4">Realiza los test VARK y Jung-Myers Briggs para conocerte mejor. Optimiza tu estudio y comprende a los demás.</p>
         <div class="d-flex gap-2">
           <a href="#" class="btn btn-primary btn-lg">Comenzar Test</a>
@@ -21,25 +21,25 @@
 </section>
 
 <!-- SECCIÓN: QUE ES VARK? -->
-<section class="py-5 bg-body-tertiary">
+<section class="py-5 ">
   <div class="container">
-    <h2 class="text-center mb-5">Modelo VARK - Estilos de Aprendizaje</h2>
+    <h4 class="text-center mb-5">Modelo VARK - Estilos de Aprendizaje</h4>
     <p class="text-center lead mb-5 col-md-8 mx-auto">El modelo VARK identifica cómo prefieres recibir y procesar información. ¡Conocerte ayuda a estudiar mejor!</p>
     
     <div class="row text-center">
       <!-- Visual -->
       <div class="col-md-3 mb-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
+        <div class="card h-100 shadow-sm bg-body-tertiary">
+          <div class="">
             <div style="font-size: 3rem;">👁️</div>
-            <h5 class="card-title mt-3">Visual</h5>
+            <h6 class="card-title mt-3">Visual</h6>
             <p class="card-text">Aprende mejor con imágenes, gráficos, diagramas y videos.</p>
           </div>
         </div>
       </div>
       <!-- Auditivo -->
       <div class="col-md-3 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100 shadow-sm bg-body-tertiary">
           <div class="card-body">
             <div style="font-size: 3rem;">🎧</div>
             <h5 class="card-title mt-3">Auditivo</h5>
@@ -49,7 +49,7 @@
       </div>
       <!-- Read/Write -->
       <div class="col-md-3 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100 shadow-sm bg-body-tertiary">
           <div class="card-body">
             <div style="font-size: 3rem;">📖</div>
             <h5 class="card-title mt-3">Lectura/Escritura</h5>
@@ -59,7 +59,7 @@
       </div>
       <!-- Kinestésico -->
       <div class="col-md-3 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100 shadow-sm bg-body-tertiary">
           <div class="card-body">
             <div style="font-size: 3rem;">🤸</div>
             <h5 class="card-title mt-3">Kinestésico</h5>
@@ -77,7 +77,7 @@
 <!-- SECCIÓN: QUE ES EL TEST DE PERSONALIDAD? -->
 <section class="py-5">
   <div class="container">
-    <h2 class="text-center mb-5">Test de Personalidad Jung-Myers Briggs</h2>
+    <h4 class="text-center mb-5">Test de Personalidad Jung-Myers Briggs</h4>
     <p class="text-center lead mb-5 col-md-8 mx-auto">Descubre cuál de los 16 tipos de personalidad te define basado en 4 dimensiones fundamentales.</p>
     
     <div class="row justify-content-center">
@@ -190,68 +190,75 @@
 <section class="py-5 bg-body-tertiary">
   <div class="container">
     <h2 class="text-center mb-5">Preguntas Frecuentes</h2>
-    <!-- data-bs-parent aquí permite que solo una pregunta esté abierta a la vez -->
-    <div class="accordion col-md-8 mx-auto" id="accordionFAQ">
-      
-      <!-- Pregunta 1 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            ¿Qué es el modelo VARK?
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionFAQ">
-          <div class="accordion-body">
-            Es un modelo que identifica tus preferencias de aprendizaje: Visual, Auditivo, Lectura/Escritura o Kinestésico.
+    
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <!-- Acordeón -->
+        <div class="accordion" id="accordionFAQ">
+          
+          <!-- Pregunta 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                ¿Qué es el modelo VARK?
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body">
+                Es un modelo que identifica tus preferencias de aprendizaje: Visual, Auditivo, Lectura/Escritura o Kinestésico.
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Pregunta 2 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            ¿Qué es el test de personalidad?
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionFAQ">
-          <div class="accordion-body">
-            Basado en la teoría de Jung, clasifica tu personalidad en 16 tipos diferentes según 4 dimensiones.
+          <!-- Pregunta 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                ¿Qué es el test de personalidad?
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body">
+                Basado en la teoría de Jung, clasifica tu personalidad en 16 tipos diferentes según 4 dimensiones.
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Pregunta 3 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            ¿Mis resultados son confidenciales?
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionFAQ">
-          <div class="accordion-body">
-            Sí, tus resultados son completamente confidenciales y solo tú (y el admin si aplica) pueden verlos.
+          <!-- Pregunta 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                ¿Mis resultados son confidenciales?
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body">
+                Sí, tus resultados son completamente confidenciales y solo tú (y el admin si aplica) pueden verlos.
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Pregunta 4 -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingFour">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            ¿Puedo repetir los tests?
-          </button>
-        </h2>
-        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionFAQ">
-          <div class="accordion-body">
-            Claro que sí. Puedes realizar los tests las veces que quieras para ver cómo evolucionan tus preferencias.
+          <!-- Pregunta 4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                ¿Puedo repetir los tests?
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+              <div class="accordion-body">
+                Claro que sí. Puedes realizar los tests las veces que quieras para ver cómo evolucionan tus preferencias.
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-    </div>
-  </div>
+        </div> <!-- /accordion -->
+      </div> <!-- /col -->
+  </div> <!-- /row -->
+  </div> <!-- /container -->
 </section>
+
+</div>
 
 <!-- FOOTER -->
 <footer class="py-4 bg-dark text-white mt-auto">

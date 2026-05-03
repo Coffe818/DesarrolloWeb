@@ -1,9 +1,10 @@
 import { Component, signal, inject, DOCUMENT, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from './sidebar/sidebar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, SidebarComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -13,7 +14,7 @@ export class App implements OnInit {
   private document = inject(DOCUMENT);
 
   isDarkMode = signal<boolean>(false);
-  paletaSeleccionada = signal<string>('0'); 
+  paletaSeleccionada = signal<string>(''); 
 
   ngOnInit(): void {
     const savedTheme = localStorage.getItem('theme');

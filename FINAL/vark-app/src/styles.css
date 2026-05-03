@@ -432,3 +432,18 @@ body {
   opacity: 0.9;
   color: #fff;
 }
+
+/* ============================================ */
+/* 🌙 FIX PARA CARDS EN DARK MODE             */
+/* ============================================ */
+/* Forzamos que las cards de colores (.bg-primary, .bg-secondary) 
+   tengan texto blanco en modo oscuro porque a veces el CSS de Bootstrap falla */
+[data-bs-theme="dark"] .card.bg-primary,
+[data-bs-theme="dark"] .card.bg-secondary {
+  color: #ffffff !important;
+}
+
+/* Ajuste para que el texto de las cards no se vea "raro" en dark mode */
+[data-bs-theme="dark"] .card {
+  color: var(--bs-body-color);
+}

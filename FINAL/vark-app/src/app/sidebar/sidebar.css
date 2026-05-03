@@ -1,0 +1,29 @@
+@media (min-width: 992px) {
+  :host {
+    display: block;
+    width: 280px;
+    /* Fijamos el alto al total de la pantalla */
+    height: 100vh;
+    /* Lo mantenemos pegado arriba mientras el resto se mueve */
+    position: sticky;
+    top: 0;
+    /* Evita que el scroll del main afecte visualmente al sidebar */
+    overflow: hidden; 
+  }
+
+  .offcanvas-lg {
+    transform: none !important;
+    visibility: visible !important;
+    position: relative !important;
+    height: 100% !important;
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* El cuerpo del sidebar solo tendrá scroll si el contenido supera la pantalla */
+  .offcanvas-body {
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+}
