@@ -151,10 +151,9 @@
       <h2 class="text-center mb-5">Contáctanos</h2>
       <div class="row">
         <div class="col-md-6 mb-4">
-          <form>
             <div class="mb-3">
               <label for="contactName" class="form-label">Nombre completo</label>
-              <input type="text" class="form-control" id="contactName" placeholder="Tu nombre" />
+              <input type="text" class="form-control" id="contactName" placeholder="Tu nombre" [(ngModel)]="contacto.Nombre" />
             </div>
             <div class="mb-3">
               <label for="contactEmail" class="form-label">Correo Electrónico</label>
@@ -163,6 +162,7 @@
                 class="form-control"
                 id="contactEmail"
                 placeholder="tu@email.com"
+                [(ngModel)]="contacto.Correo" 
               />
             </div>
             <div class="mb-3">
@@ -172,6 +172,7 @@
                 class="form-control"
                 id="contactSubject"
                 placeholder="Consulta sobre tests"
+                [(ngModel)]="contacto.Asunto"
               />
             </div>
             <div class="mb-3">
@@ -181,10 +182,10 @@
                 id="contactMessage"
                 rows="4"
                 placeholder="Escribe tu mensaje aquí..."
+                [(ngModel)]="contacto.Mensaje"
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
-          </form>
+            <button type="submit" class="btn btn-primary" (click)="btnEnviarCorreo()">Enviar Mensaje</button>
         </div>
 
         <div class="col-md-6 mb-4">
