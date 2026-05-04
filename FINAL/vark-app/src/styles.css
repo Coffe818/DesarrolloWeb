@@ -414,14 +414,12 @@ body {
 /* 🛠️ AJUSTES EXTRA PARA DARK MODE          */
 /* ============================================ */
 
-/* Ajuste para Cards en Dark Mode (usar el color light como fondo de tarjeta) */
 [data-bs-theme="dark"] .card {
   background-color: var(--bs-light);
   border-color: var(--bs-primary);
   color: var(--bs-body-color);
 }
 
-/* Botón de Acento Personalizado */
 .btn-accent {
   background-color: var(--color-accent);
   border-color: var(--color-accent);
@@ -436,14 +434,12 @@ body {
 /* ============================================ */
 /* 🌙 FIX PARA CARDS EN DARK MODE             */
 /* ============================================ */
-/* Forzamos que las cards de colores (.bg-primary, .bg-secondary) 
-   tengan texto blanco en modo oscuro porque a veces el CSS de Bootstrap falla */
+
 [data-bs-theme="dark"] .card.bg-primary,
 [data-bs-theme="dark"] .card.bg-secondary {
   color: #ffffff !important;
 }
 
-/* Ajuste para que el texto de las cards no se vea "raro" en dark mode */
 [data-bs-theme="dark"] .card {
   color: var(--bs-body-color);
 }
