@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { ContactoModel } from '../../shared/models/ContactoModel';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ContactoModel } from '../../shared/models/contacto.model';
 
 @Component({
   selector: 'app-landing',

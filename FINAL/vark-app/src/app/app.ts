@@ -1,6 +1,6 @@
 import { Component, signal, inject, DOCUMENT, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from './sidebar/sidebar';
+import { SidebarComponent } from './components/sidebar/sidebar';
 
 @Component({
   selector: 'app-root',
