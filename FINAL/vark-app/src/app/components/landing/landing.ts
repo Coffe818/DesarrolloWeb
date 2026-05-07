@@ -30,8 +30,7 @@ export class LandingComponent {
     });
   }
 
-  presentarExamen(){
-    console.log('Navegando a presentar examen...');
-    this.router.navigateByUrl('/presentar-examen');
+  presentarExamen(tipo: string) {
+    this.router.navigateByUrl(`/presentar-examen/${tipo}`);
   }
 }

@@ -8,9 +8,9 @@
             Realiza los test VARK y Jung-Myers Briggs para conocerte mejor. Optimiza tu estudio y
             comprende a los demás.
           </p>
-          <div class="d-flex gap-2">
+          <!-- <div class="d-flex gap-2">
             <button class="btn btn-primary btn-lg" (click)="presentarExamen()">Comenzar Test</button>
-          </div>
+          </div> -->
         </div>
         <div class="col-lg-6 text-center mt-4 mt-lg-0">
           <div style="font-size: 150px">🧠</div>
@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="text-center mt-4">
-        <a href="#" class="btn btn-primary">Realizar Test VARK</a>
+        <button (click)="presentarExamen('1')" class="btn btn-primary">Realizar Test VARK</button>
       </div>
     </div>
   </section>
@@ -100,7 +100,7 @@
         </div>
       </div>
       <div class="text-center mt-4">
-        <a href="#" class="btn btn-secondary">Realizar Test de Personalidad</a>
+        <button (click)="presentarExamen('2')" class="btn btn-secondary">Realizar Test de Personalidad</button>
       </div>
     </div>
   </section>

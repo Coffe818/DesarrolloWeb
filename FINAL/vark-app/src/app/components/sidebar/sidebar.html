@@ -1,45 +1,58 @@
+<button
+  class="btn btn-primary position-fixed shadow-sm d-flex align-items-center justify-content-center d-lg-none"
+  style="top: 15px; left: 15px; z-index: 1040; width: 45px; height: 45px; border-radius: 10px"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#mobileSidebar"
+>
+  <span class="material-icons"> menu </span>
+</button>
 
-  <button class="btn btn-primary position-fixed shadow-sm d-flex align-items-center justify-content-center d-lg-none" 
-        style="top: 15px; left: 15px; z-index: 1040; width: 45px; height: 45px; border-radius: 10px;" 
-        type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-
-  <div class="offcanvas-lg offcanvas-start  border-end" tabindex="-1" id="mobileSidebar" style="width: 280px;">
-    <div class="offcanvas-header border-bottom">
-      <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasLabel">VARK</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#mobileSidebar"></button>
-    </div>
-    
-    <div class="offcanvas-body d-flex flex-column p-0">
-      <ul class="nav nav-pills flex-column mb-auto p-3">
-        <li class="nav-item mb-1">
-          <a class="nav-link active" href="#" data-bs-dismiss="offcanvas">Inicio</a>
-        </li>
-        <li class="nav-item mb-1">
-          <a class="nav-link text-body" href="#" data-bs-dismiss="offcanvas">Test VARK</a>
-        </li>
-        <li class="nav-item mb-1">
-          <a class="nav-link text-body" href="#" data-bs-dismiss="offcanvas">Test Personalidad</a>
-        </li>
-        <li class="nav-item mb-1">
-          <a class="nav-link text-body" href="#" data-bs-dismiss="offcanvas">Resultados</a>
-        </li>
-      </ul>
-
-      <div class="p-3 border-top bg-light-subtle">
-        <button class="btn w-100 mb-2" 
-                [class]="isDarkMode() ? 'btn-dark' : 'btn-outline-dark'" 
-                (click)="ToggleTheme()">
-          @if (isDarkMode()) {
-            ☀️ Modo Claro
-          } @else {
-            🌙 Modo Oscuro
-          }
-        </button>
-        <a href="#" class="btn btn-primary w-100 fw-bold" data-bs-dismiss="offcanvas">Iniciar Sesión</a>
-      </div>
-    </div>
+<div
+  class="offcanvas-lg offcanvas-start border-end"
+  tabindex="-1"
+  id="mobileSidebar"
+  style="width: 280px"
+>
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasLabel">VARK</h5>
+    <button
+      type="button"
+      class="btn-close"
+      
+      data-bs-target="#mobileSidebar"
+    ></button>
   </div>
 
+  <div class="offcanvas-body d-flex flex-column p-0">
+    <ul class="nav nav-pills flex-column mb-auto p-3">
+      <li class="nav-item mb-1">
+        <button class="nav-link active w-100 text-start" (click)="navigateTo('/')"  >Inicio</button>
+      </li>
+      <li class="nav-item mb-1">
+        <button class="nav-link text-body" (click)="navigateTo('/presentar-examen/1')" >Test VARK</button>
+      </li>
+      <li class="nav-item mb-1">
+        <button class="nav-link text-body" (click)="navigateTo('/presentar-examen/2')" >Test Personalidad</button>
+      </li>
+      <li class="nav-item mb-1">
+        <button class="nav-link text-body" (click)="navigateTo('/resultados')" >Resultados</button>
+      </li>
+    </ul>
+
+    <div class="p-3 border-top bg-light-subtle">
+      <button
+        class="btn w-100 mb-2"
+        [class]="isDarkMode() ? 'btn-dark' : 'btn-outline-dark'"
+        (click)="ToggleTheme()"
+      >
+        @if (isDarkMode()) {
+          ☀️ Modo Claro
+        } @else {
+          🌙 Modo Oscuro
+        }
+      </button>
+      <button class="btn btn-primary w-100 fw-bold"  (click)="navigateTo('/login')" >Iniciar Sesión</button>
+    </div>
+  </div>
+</div>

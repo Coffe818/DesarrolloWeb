@@ -1,4 +1,5 @@
 import { Component, signal, inject, DOCUMENT } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ export class SidebarComponent {
 
   isSidebarOpen = false;
   private document = inject(DOCUMENT);
+  private router = inject(Router);
 
   constructor() {
     const savedTheme = localStorage.getItem('theme');
@@ -37,5 +39,9 @@ export class SidebarComponent {
     } else {
       this.document.documentElement.setAttribute('data-bs-theme', 'light');
     }
+  }
+
+  navigateTo(path: string) {
+    this.router.navigateByUrl(path);
   }
 }

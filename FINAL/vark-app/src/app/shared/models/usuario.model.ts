@@ -1,5 +1,8 @@
 export class UsuarioModel {
-    id: number = 0;
+    usuario_id: number = 0;
     nombre: string = '';
     email: string = '';
+    password: string = '';
+    grupo: 'PRIMARIA' | 'SECUNDARIA' | 'PREPA'| 'LICENCIATURA' | 'MAESTRIA' | 'DOCTORADO'  = 'PRIMARIA';
+    rol: 'ADMIN' | 'USUARIO' = 'USUARIO';
 }

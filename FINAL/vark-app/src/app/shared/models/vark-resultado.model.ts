@@ -4,4 +4,5 @@ export class VarkResultadoModel {
     a: number = 0;
     r: number = 0;
     k: number = 0;
+    arquetipo_id: number = 0;
 }
