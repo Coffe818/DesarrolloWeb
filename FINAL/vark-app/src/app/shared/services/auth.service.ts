@@ -1,31 +1,24 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { HttpService } from './http.service';
+import { UsuarioModel } from '../models/usuario.model';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  /**
-   * Mock login implementation. In a real app this would call the backend API.
-   * Succeeds for emails ending with @example.com and password length >= 6.
-   */
-  login(email: string, password: string, remember: boolean): Observable<{ success: boolean; token?: string; message?: string }> {
-    const ok = !!email && !!password && password.length >= 6 && email.endsWith('@example.com');
-    const response = ok
-      ? { success: true, token: 'mock-token' as string }
-      : { success: false, message: 'Credenciales inválidas' as string };
+  httpService = inject(HttpService);
+  utilService = inject(UtilService);
 
-    return of(response).pipe(
-      delay(500),
-      tap(res => {
-        if (res.success && res.token) {
-          localStorage.setItem('authToken', res.token!);
-        }
-        if (remember && res.success) {
-          localStorage.setItem('rememberedEmail', email);
-        }
-      })
-    );
+
+  login(usuario: UsuarioModel) {
+    usuario = this.utilService.buildBody(usuario, ['email', 'contrasena']);
+    return this.httpService.post('/api/login', usuario, false);
+  }
+  createAccount(usuario: UsuarioModel) {
+    usuario = this.utilService.buildBody(usuario, ['nombre', 'email', 'contrasena', 'grupo']);
+    return this.httpService.post('/api/usuarios', usuario, false);
   }
 }

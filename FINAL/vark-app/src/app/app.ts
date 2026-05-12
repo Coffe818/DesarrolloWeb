@@ -1,6 +1,7 @@
 import { Component, signal, inject, DOCUMENT, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar';
+import { UtilService } from './shared/services/util.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { SidebarComponent } from './components/sidebar/sidebar';
 })
 export class App implements OnInit {
   protected readonly title = signal('vark-app');
+  utilService = inject(UtilService);
   
   private document = inject(DOCUMENT);
 
