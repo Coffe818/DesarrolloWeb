@@ -1,5 +1,7 @@
+import { RespuestaModel } from "./respuesta.model";
+
 export class PreguntaModel {
-    id: number = 0;
-    examen_id: number = 0;
-    texto: string = '';
+    pregunta_id: number = 0;
+    texto?: string = '';
+    respuestas: RespuestaModel[] = [];
 }

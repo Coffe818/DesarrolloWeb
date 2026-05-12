@@ -1,13 +1,25 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { PreguntaModel } from '../../shared/models/pregunta.model';
 import { RespuestaModel } from '../../shared/models/respuesta.model';
 import { MatRadioModule } from '@angular/material/radio';
+import { TestService } from '../../shared/services/test.service';
 
-interface ExamenPregunta {
-  pregunta: PreguntaModel;
-  respuestas: RespuestaModel[];
+class ExamenPregunta {
+  descripcion: string = '';
+  examen_id: number = 0;
+  preguntas: PreguntaModel[] = [];
+  tipo: string = '';
+  nombre: string = '';
+}
+
+class ExamenRespondido {
+  examen_id: number = 0;
+  tipo: string = '';
+  nombre: string = '';
+  descripcion: string = '';
+  preguntas: { pregunta_id: number; respuesta_id: number }[] = [];
 }
 
 @Component({
@@ -18,122 +30,108 @@ interface ExamenPregunta {
   styleUrls: ['./realizar-examen.component.css'],
 })
 export class RealizarExamenComponent implements OnInit {
-  examenCompleto: ExamenPregunta[] = [];
+  examenCompleto: ExamenPregunta = new ExamenPregunta();
   preguntaActualIndex: number = 0;
-
-  preguntaActual: PreguntaModel | null = null;
+  preguntaActual = signal<PreguntaModel | null>(null);
   respuestasActuales: RespuestaModel[] = [];
-  respuestaControl = new FormControl(null);
   esVark = signal(false);
+  respuestaControl = new FormControl('');
+
+  exmenFinal: ExamenRespondido = new ExamenRespondido();
 
   respuestasUsuario: (RespuestaModel | null)[] = [];
+  testService = inject(TestService);
 
   @Input() set idTipo(value: string) {
     this.esVark.set(value === '1');
-    this.preguntaActualIndex = 0;
-    this.simularCargaExamen();
-    this.respuestasUsuario = new Array(this.examenCompleto.length).fill(null);
-    this.cargarPreguntaActual();
+    this.generarExamen(value);
   }
 
   ngOnInit(): void {}
 
-  simularCargaExamen(): void {
-    this.examenCompleto = [
-      {
-        pregunta: { id: 1, examen_id: 1, texto: '¿Qué preferís hacer en tu tiempo libre?' },
-        respuestas: [
-          { id: 1, pregunta_id: 1, texto: 'Leer un libro o ver un documental', valor: 'R' },
-          { id: 2, pregunta_id: 1, texto: 'Escuchar música o un podcast', valor: 'A' },
-          { id: 3, pregunta_id: 1, texto: 'Salir a caminar y explorar', valor: 'K' },
-          { id: 4, pregunta_id: 1, texto: 'Mirar una película o una serie', valor: 'V' },
-        ],
+  generarExamen(tipo: string) {
+    this.testService.generarExamen(tipo).subscribe({
+      next: (data: any) => {
+        this.examenCompleto = data;
+        this.preguntaActualIndex = 0;
+        this.respuestasUsuario = new Array(this.examenCompleto.preguntas.length).fill(null);
+        this.exmenFinal.descripcion = this.examenCompleto.descripcion;
+        this.exmenFinal.tipo = this.examenCompleto.tipo;
+        this.exmenFinal.nombre = this.examenCompleto.nombre;
+        this.exmenFinal.examen_id = this.examenCompleto.examen_id;
+        this.cargarPreguntaActual();
       },
-      {
-        pregunta: {
-          id: 2,
-          examen_id: 1,
-          texto: 'Cuando aprendés algo nuevo, ¿cómo te resulta más fácil?',
-        },
-        respuestas: [
-          { id: 5, pregunta_id: 2, texto: 'Viendo diagramas y gráficos', valor: 'V' },
-          {
-            id: 6,
-            pregunta_id: 2,
-            texto: 'A través de la práctica, haciendo las cosas',
-            valor: 'K',
-          },
-          { id: 7, pregunta_id: 2, texto: 'Leyendo el manual o los apuntes', valor: 'R' },
-          { id: 8, pregunta_id: 2, texto: 'Escuchando la explicación de un profesor', valor: 'A' },
-        ],
-      },
-      {
-        pregunta: {
-          id: 3,
-          examen_id: 1,
-          texto: 'Imaginá que estás armando un mueble, ¿qué hacés primero?',
-        },
-        respuestas: [
-          { id: 9, pregunta_id: 3, texto: 'Leo las instrucciones paso a paso', valor: 'R' },
-          { id: 10, pregunta_id: 3, texto: 'Miro los dibujos del manual', valor: 'V' },
-          {
-            id: 11,
-            pregunta_id: 3,
-            texto: 'Empiezo a ensamblar las piezas a ver qué pasa',
-            valor: 'K',
-          },
-          {
-            id: 12,
-            pregunta_id: 3,
-            texto: 'Le pido a alguien que me lo explique en voz alta',
-            valor: 'A',
-          },
-        ],
-      },
-    ];
+    });
   }
 
   cargarPreguntaActual(): void {
-    this.respuestaControl.reset();
-    if (this.preguntaActualIndex < this.examenCompleto.length) {
-      const data = this.examenCompleto[this.preguntaActualIndex];
-      this.preguntaActual = data.pregunta;
+    if (this.preguntaActualIndex < this.examenCompleto.preguntas.length) {
+      const data = this.examenCompleto.preguntas[this.preguntaActualIndex];
+      this.preguntaActual.set(data);
       this.respuestasActuales = data.respuestas;
+
+      const respuestaPrevia = this.exmenFinal.preguntas.find(
+        (p) => p.pregunta_id === data.pregunta_id,
+      );
+
+      if (respuestaPrevia) {
+        const valor = this.respuestasActuales.find(
+          (r) => r.respuesta_id === respuestaPrevia.respuesta_id,
+        );
+        this.respuestaControl.setValue(valor as any);
+      } else {
+        this.respuestaControl.reset();
+      }
+      
     } else {
-      this.preguntaActual = null;
+      this.preguntaActual.set(null);
       this.respuestasActuales = [];
+      this.guardarExamenRespondido();
       console.log('¡Examen finalizado!');
     }
   }
 
+  actualizarRespuestaLocal(): void {
+    const preguntaId = this.preguntaActual()?.pregunta_id;
+    const respuestaSeleccionada = this.respuestaControl.value as unknown as RespuestaModel;
+
+    if (preguntaId && respuestaSeleccionada) {
+      const index = this.exmenFinal.preguntas.findIndex((p) => p.pregunta_id === preguntaId);
+      const datosRespuesta = {
+        pregunta_id: preguntaId,
+        respuesta_id: respuestaSeleccionada.respuesta_id,
+      };
+
+      if (index !== -1) {
+        this.exmenFinal.preguntas[index] = datosRespuesta;
+      } else {
+        this.exmenFinal.preguntas.push(datosRespuesta);
+      }
+    }
+  }
+
   siguientePregunta(): void {
-    this.respuestasUsuario[this.preguntaActualIndex] = this.respuestaControl.value;
+    this.actualizarRespuestaLocal();
     this.preguntaActualIndex++;
     this.cargarPreguntaActual();
   }
 
   anteriorPregunta(): void {
     if (this.preguntaActualIndex > 0) {
-      // Guardamos por si acaso cambió algo antes de volver
-      this.respuestasUsuario[this.preguntaActualIndex] = this.respuestaControl.value;
-
+      this.actualizarRespuestaLocal();
       this.preguntaActualIndex--;
       this.cargarPreguntaActual();
     }
   }
 
   guardarExamenRespondido(): void {
-    console.log(
-      '%c--- Resumen del Examen ---',
-      'color: #2196F3; font-weight: bold; font-size: 14px;',
-    );
-
-    this.examenCompleto.forEach((item, index) => {
-      const respuesta = this.respuestasUsuario[index];
-      console.log(`Pregunta ${index + 1}: `, item.pregunta);
-      console.log(`Respuesta seleccionada: `, respuesta);
-      console.log(`Valor: ${respuesta ? respuesta.valor : 'N/A'}`);
-      console.log('---------------------------');
+    this.testService.guardarExamen(this.exmenFinal).subscribe({
+      next: (data) => {
+        console.log('Examen guardado exitosamente:', data);
+      },
+      error: (error) => {
+        console.error('Error al guardar el examen:', error);
+      },
     });
   }
 }

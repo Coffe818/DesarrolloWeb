@@ -1,42 +1,41 @@
-@if (preguntaActual) {
-  <div class="container mt-5 d-flex justify-content-center">
-   
-    <div class="card shadow-sm border-0 w-100 " style="max-width: 75vw">
+@if (preguntaActual()) {
+  <div class="container mt-3 d-flex justify-content-center">
+    <div class="card shadow-sm border-0 w-100" style="max-width: 75vw">
       <div class="card-body p-4 p-md-5">
         <h3 class="mb-5 fs-2 fw-bold text-center lh-base">
-          {{esVark() ? 'Test de Estilos de Aprendizaje VARK' : 'Test de Personalidad'}}
+          {{ esVark() ? 'Test de Estilos de Aprendizaje VARK' : 'Test de Personalidad' }}
         </h3>
         <h3 class="mb-4 fs-4 fw-bold text-center lh-base">
-          {{ preguntaActual.texto }}
+          {{ preguntaActual()?.texto }}
         </h3>
 
-        <!-- gap-3 o gap-4 para que "respiren" más las opciones -->
-        <mat-radio-group 
-          [formControl]="respuestaControl" 
-          class="d-flex flex-column gap-3">
-          
-          @for (respuesta of respuestasActuales; track respuesta.id) {
-            <mat-radio-button 
-              [value]="respuesta"
-              class="w-100 p-3 border rounded-3 shadow-sm">
-              
-              <div class="ms-2 fs-5 text-wrap ">
+        <mat-radio-group [formControl]="respuestaControl" class="d-flex flex-column gap-3">
+          @for (respuesta of respuestasActuales; track respuesta.respuesta_id) {
+            <mat-radio-button [value]="respuesta" class="w-100 p-3 border rounded-3 shadow-sm">
+              <div class="ms-2 fs-5 text-wrap">
                 {{ respuesta.texto }}
               </div>
-              
             </mat-radio-button>
           }
         </mat-radio-group>
 
         <div class="d-grid mt-5">
-          <button 
-            class="btn btn-primary btn-lg py-3 shadow" 
-            (click)="siguientePregunta()" 
-            [disabled]="!respuestaControl.value">
+          <button
+            class="btn btn-primary btn-lg py-3 shadow"
+            (click)="siguientePregunta()"
+            [disabled]="!respuestaControl.value"
+          >
             Siguiente Pregunta
           </button>
         </div>
-
+        <div class="d-grid mt-1">
+          <button
+            class="btn btn-outline-primary btn-lg py-3 shadow"
+            (click)="anteriorPregunta()"
+          >
+            Anterior Pregunta
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -46,7 +45,9 @@
       <div class="card-body p-5">
         <h2 class="card-title text-success">¡Completaste el examen!</h2>
         <p class="card-text">Gracias por participar.</p>
-        <button (click)="guardarExamenRespondido()" class="btn btn-outline-primary mt-3">Volver al Inicio</button>
+        <button (click)="guardarExamenRespondido()" class="btn btn-outline-primary mt-3">
+          Volver al Inicio
+        </button>
       </div>
     </div>
   </div>
