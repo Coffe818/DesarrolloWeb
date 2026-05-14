@@ -21,6 +21,6 @@ export const routes: Routes = [
   },
   {
     path: 'resultado/:idExamen',
-    loadComponent: () => import('./components/resultados/resultados.component').then(m => m.ResultadosComponent)
+    loadComponent: () => import('./components/resultado/resultado.component').then(m => m.ResultadoComponent)
   },
 ];

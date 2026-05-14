@@ -5,6 +5,7 @@ import { PreguntaModel } from '../../shared/models/pregunta.model';
 import { RespuestaModel } from '../../shared/models/respuesta.model';
 import { MatRadioModule } from '@angular/material/radio';
 import { TestService } from '../../shared/services/test.service';
+import { Router } from '@angular/router';
 
 class ExamenPregunta {
   descripcion: string = '';
@@ -41,6 +42,8 @@ export class RealizarExamenComponent implements OnInit {
 
   respuestasUsuario: (RespuestaModel | null)[] = [];
   testService = inject(TestService);
+router = inject(Router);
+
 
   @Input() set idTipo(value: string) {
     this.esVark.set(value === '1');
@@ -126,8 +129,10 @@ export class RealizarExamenComponent implements OnInit {
 
   guardarExamenRespondido(): void {
     this.testService.guardarExamen(this.exmenFinal).subscribe({
-      next: (data) => {
-        console.log('Examen guardado exitosamente:', data);
+      next: (data: any) => {
+        const examen_id = data?.examen_presentado_id;
+
+        this.router.navigate(['/resultado', examen_id]);
       },
       error: (error) => {
         console.error('Error al guardar el examen:', error);

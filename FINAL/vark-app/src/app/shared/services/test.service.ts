@@ -14,4 +14,8 @@ export class TestService {
   guardarExamen(examen: any) {
     return this.httpService.post('/api/examenes-presentados/enviar', examen, false);
   }
+
+  obtenerResultado(idExamenPresentado: number) {
+    return this.httpService.get(`/api/examenes-presentados/${idExamenPresentado}`, false);
+  }
 }
