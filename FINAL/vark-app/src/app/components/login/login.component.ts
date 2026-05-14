@@ -39,6 +39,8 @@ export class LoginComponent {
     this.authService.login(this.user).subscribe({
       next: (response) => {
         this.alertService.success('¡Inicio de sesión exitoso!');
+        console.log('Usuario logueado:', this.authService.usuarioLogueado());
+        console.log('Token:', this.authService.token());
       }
     });
   }

@@ -1,5 +1,6 @@
 import { Component, signal, inject, DOCUMENT } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +10,10 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
   isDarkMode = signal<boolean>(false);
-
   isSidebarOpen = false;
   private document = inject(DOCUMENT);
   private router = inject(Router);
+  authService = inject(AuthService);
 
   constructor() {
     const savedTheme = localStorage.getItem('theme');
@@ -43,5 +44,9 @@ export class SidebarComponent {
 
   navigateTo(path: string) {
     this.router.navigateByUrl(path);
+  }
+
+  logOut() {
+    this.authService.logOut();
   }
 }

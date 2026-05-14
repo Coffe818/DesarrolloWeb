@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { segGuard } from './shared/services/seg.service';
 
 export const routes: Routes = [
   {
@@ -12,5 +13,14 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
+  },
+  {
+    path: 'resultados',
+    canActivate: [segGuard],
+    loadComponent: () => import('./components/resultados/resultados.component').then(m => m.ResultadosComponent)
+  },
+  {
+    path: 'resultado/:idExamen',
+    loadComponent: () => import('./components/resultados/resultados.component').then(m => m.ResultadosComponent)
   },
 ];

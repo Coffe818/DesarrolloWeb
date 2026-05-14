@@ -35,9 +35,11 @@
       <li class="nav-item mb-1">
         <button class="nav-link text-body" (click)="navigateTo('/presentar-examen/2')" >Test Personalidad</button>
       </li>
-      <li class="nav-item mb-1">
-        <button class="nav-link text-body" (click)="navigateTo('/resultados')" >Resultados</button>
-      </li>
+      @if (authService.token()) {
+        <li class="nav-item mb-1">
+          <button class="nav-link text-body" (click)="navigateTo('/resultados')" >Resultados</button>
+        </li>
+      }
     </ul>
 
     <div class="p-3 border-top bg-light-subtle">
@@ -52,7 +54,12 @@
           🌙 Modo Oscuro
         }
       </button>
+      @if (authService.token()) {
+      <button class="btn btn-primary w-100 fw-bold"  (click)="logOut()" >Cerrar Sesión</button>
+        
+      }@else {
       <button class="btn btn-primary w-100 fw-bold"  (click)="navigateTo('/login')" >Iniciar Sesión</button>
+      }
     </div>
   </div>
 </div>

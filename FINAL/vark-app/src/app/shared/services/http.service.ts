@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import he from '@angular/common/locales/he';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { catchError, finalize, Observable } from 'rxjs';
 import { UtilService } from './util.service';
 
@@ -10,6 +9,8 @@ import { UtilService } from './util.service';
 export class HttpService {
   private apiUrl = (import.meta as any).env.NG_APP_BACKEND_URL;
   utilService = inject(UtilService);
+  token = signal<string | null>(null);
+
 
   private getHeaders(useToken: boolean): HttpHeaders {
     let headers = new HttpHeaders({
@@ -18,12 +19,7 @@ export class HttpService {
     });
 
     if (useToken) {
-      const userJson = localStorage.getItem('user');
-      const authToken = userJson ? JSON.parse(userJson).token : null;
-
-      if (authToken) {
-        headers = headers.set('Authorization', authToken);
-      }
+      headers = headers.set('Authorization', this.token() || '');
     }
 
     return headers;
