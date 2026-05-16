@@ -18,4 +18,8 @@ export class TestService {
   obtenerResultado(idExamenPresentado: number) {
     return this.httpService.get(`/api/examenes-presentados/${idExamenPresentado}`, false);
   }
+
+  obtenerHistorial() {
+    return this.httpService.get('/api/examenes-presentados', true);
+  }
 }

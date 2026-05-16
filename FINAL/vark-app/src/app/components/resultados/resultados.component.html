@@ -1,1 +1,97 @@
-estoy vivooooo resultados con S
+<div class="container my-5">
+  <!-- Encabezado de la sección -->
+  <div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+      <h3 class="fw-bold mb-1">Historial de Exámenes Presentados</h3>
+      <p class="text-muted">
+        Consulta la lista de evaluaciones realizadas y accede a sus resultados.
+      </p>
+    </div>
+    <div class="col-md-4 text-md-end">
+      <span class="badge bg-light text-dark border p-2">
+        Total: {{ listaExamenes.length }} registros
+      </span>
+    </div>
+  </div>
+
+  <!-- Tabla de resultados -->
+  <div class="card shadow-sm border-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class=" text-uppercase fs-7 tracking-wider">
+          <tr>
+            <th scope="col" class="ps-4 py-3">ID Usuario</th>
+            <th scope="col" class="py-3">Tipo Examen</th>
+            <th scope="col" class="py-3">Grupo</th>
+            <th scope="col" class="py-3">Fecha</th>
+            <th scope="col" class="py-3 text-end pe-4">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (listaExamenes.length === 0) {
+            <tr>
+              <td colspan="5" class="text-center py-5 text-muted">
+                <div class="fs-2 mb-2">📋</div>
+                No se encontraron exámenes presentados.
+              </td>
+            </tr>
+          } @else {
+            @for (item of listaExamenes; track item.examen_presentado_id) {
+              <tr>
+                <td class="ps-4">
+                  <div class="d-flex align-items-center gap-2">
+                    <div
+                      class="bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center"
+                      style="width: 32px; height: 32px; font-size: 0.85rem"
+                    >
+                      👤
+                    </div>
+                    <span class="fw-semibold text-dark">Usuario #{{ item.usuario_id }}</span>
+                  </div>
+                </td>
+
+                <td>
+                  @if (item.examen.tipo === 'VARK') {
+                    <span
+                      class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1"
+                    >
+                      🧠 VARK ({{ item.examen.nombre }})
+                    </span>
+                  } @else {
+                    <span
+                      class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1"
+                    >
+                      🎭 JUNG ({{ item.examen.nombre }})
+                    </span>
+                  }
+                </td>
+
+                <!-- Columna Grupo -->
+                <td>
+                  <span class="text-muted fw-medium fs-6">{{ item.grupo }}</span>
+                </td>
+
+                <!-- Columna Fecha formateada -->
+                <td>
+                  <small class="text-secondary">
+                    {{ item.fecha_creacion | date: 'dd/MM/yyyy HH:mm' }}
+                  </small>
+                </td>
+
+                <!-- Columna Ver Resultado -->
+                <td class="text-end pe-4">
+                  <button
+                    class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm"
+                    (click)="verResultado(item.examen_presentado_id)"
+                  >
+                    👁️ Ver resultado
+                  </button>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
