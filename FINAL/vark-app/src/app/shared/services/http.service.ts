@@ -19,7 +19,10 @@ export class HttpService {
     });
 
     if (useToken) {
-      headers = headers.set('Authorization', this.token() || '');
+      const t = this.token();
+      if (t) {
+        headers = headers.set('Authorization', `Token ${t}`);
+      }
     }
 
     return headers;

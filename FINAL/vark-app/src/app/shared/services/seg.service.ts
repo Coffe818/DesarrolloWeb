@@ -12,3 +12,18 @@ export const segGuard: CanActivateFn = (route, state) => {
 
   return router.parseUrl('/login');
 };
+
+export const adminGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.token() && authService.esAdmin()) {
+    return true;
+  }
+
+  if (authService.token()) {
+    return router.parseUrl('/historial');
+  }
+
+  return router.parseUrl('/login');
+};

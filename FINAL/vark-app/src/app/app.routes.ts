@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { segGuard } from './shared/services/seg.service';
+import { adminGuard, segGuard } from './shared/services/seg.service';
 
 export const routes: Routes = [
   {
@@ -25,6 +25,12 @@ export const routes: Routes = [
   },
   {
     path: 'grupos',
+    canActivate: [adminGuard],
     loadComponent: () => import('./components/grupos/grupos.component').then(m => m.GruposComponent)
+  },
+  {
+    path: 'usuarios',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./components/usuarios/usuarios.component').then(m => m.UsuariosComponent)
   },
 ];

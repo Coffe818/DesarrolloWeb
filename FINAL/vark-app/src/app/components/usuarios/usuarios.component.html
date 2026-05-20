@@ -1,0 +1,178 @@
+<div class="container my-5 d-flex justify-content-center">
+  <div class="card shadow-sm border-0 w-100" style="max-width: 75vw">
+    @if (!mostrarFormulario()) {
+      <!-- Vista de Tabla -->
+      <div class="card-body p-4 p-md-5">
+        <div class="row mb-4 align-items-center">
+          <div class="col-md-8">
+            <h3 class="fw-bold mb-1">Gestión de Usuarios</h3>
+            <p class="text-muted">Consulta la lista de usuarios registrados en la plataforma.</p>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <span class="badge bg-light text-dark border p-2">
+              Total: {{ listaUsuarios().length }} registros
+            </span>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="text-uppercase fs-7 tracking-wider">
+              <tr>
+                <th scope="col" class="ps-4 py-3">ID</th>
+                <th scope="col" class="py-3">Nombre</th>
+                <th scope="col" class="py-3">Email</th>
+                <th scope="col" class="py-3">Grupo</th>
+                <th scope="col" class="py-3">Rol</th>
+                <th scope="col" class="py-3 text-end pe-4">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (listaUsuarios().length === 0) {
+                <tr>
+                  <td colspan="6" class="text-center py-5 text-muted">
+                    No se encontraron usuarios registrados.
+                  </td>
+                </tr>
+              } @else {
+                @for (usuario of listaUsuarios(); track usuario.usuario_id) {
+                  <tr>
+                    <td class="ps-4">
+                      <span class="fw-semibold">{{ usuario.usuario_id }}</span>
+                    </td>
+
+                    <td>
+                      <span class="fw-medium">{{ usuario.nombre }}</span>
+                    </td>
+
+                    <td>
+                      <small class="text-muted">{{ usuario.email }}</small>
+                    </td>
+
+                    <td>
+                      <span
+                        class="badge bg-info-subtle text-info border border-info-subtle px-2 py-1"
+                      >
+                        {{ usuario.grupo || 'N/A' }}
+                      </span>
+                    </td>
+
+                    <td>
+                      @if (usuario.rol === 'ADMIN') {
+                        <span
+                          class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1"
+                        >
+                          ADMIN
+                        </span>
+                      } @else {
+                        <span
+                          class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1"
+                        >
+                          {{ usuario.rol }}
+                        </span>
+                      }
+                    </td>
+
+                    <td class="text-end pe-4">
+                      <button
+                        class="btn btn-outline-primary btn-sm rounded-pill px-3 me-2"
+                        (click)="abrirFormularioEditar(usuario)"
+                        title="Editar"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        class="btn btn-outline-danger btn-sm rounded-pill px-3"
+                        (click)="borrarUsuario(usuario.usuario_id, usuario.nombre)"
+                        title="Eliminar"
+                      >
+                        Borrar
+                      </button>
+                    </td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    } @else {
+      <!-- Vista de Formulario de Edición -->
+      <div class="card-body p-4 p-md-5">
+        <h2 class="mb-5 fw-bold text-center lh-base">Editar Usuario</h2>
+
+        @if (usuarioEditando) {
+          <form>
+            <div class="mb-3">
+              <label for="nombre" class="form-label fw-semibold">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                [(ngModel)]="usuarioEditando.nombre"
+                name="nombre"
+                placeholder="Ingrese el nombre"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                [(ngModel)]="usuarioEditando.email"
+                name="email"
+                placeholder="Ingrese el email"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="grupo" class="form-label fw-semibold">Grupo</label>
+              <select
+                class="form-select"
+                id="grupo"
+                [(ngModel)]="usuarioEditando.grupo"
+                name="grupo"
+              >
+                <option value="" disabled selected>Selecciona tu grupo</option>
+                <option value="PRIMARIA">Primaria</option>
+                <option value="SECUNDARIA">Secundaria</option>
+                <option value="PREPA">Preparatoria</option>
+                <option value="LICENCIATURA">Licenciatura</option>
+                <option value="MAESTRIA">Maestría</option>
+                <option value="DOCTORADO">Doctorado</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="rol" class="form-label fw-semibold">Rol</label>
+              <select class="form-select" id="rol" [(ngModel)]="usuarioEditando.rol" name="rol">
+                <option value="USUARIO">USUARIO</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </div>
+
+            <div class="d-grid mt-4 gap-3">
+              <button
+                type="button"
+                class="btn btn-primary btn-lg py-2 shadow fw-bold"
+                (click)="guardarCambios()"
+              >
+                Guardar cambios
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-link text-decoration-none text-center"
+                (click)="cancelarEdicion()"
+              >
+                Volver a la lista
+              </button>
+            </div>
+          </form>
+        }
+      </div>
+    }
+  </div>
+</div>

@@ -64,6 +64,6 @@ export class HistorialComponent implements OnInit {
   }
 
   verResultado(idPresentado: number) {
-    this.router.navigateByUrl(`/resultado-examen/${idPresentado}`);
+    this.router.navigateByUrl(`/resultado/${idPresentado}`);
   }
 }

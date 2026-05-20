@@ -3,6 +3,6 @@ export class UsuarioModel {
     nombre: string = '';
     email: string = '';
     contrasena: string = '';
-    grupo: 'PRIMARIA' | 'SECUNDARIA' | 'PREPA'| 'LICENCIATURA' | 'MAESTRIA' | 'DOCTORADO'  = 'PRIMARIA';
+    grupo: 'PRIMARIA' | 'SECUNDARIA' | 'PREPA'| 'LICENCIATURA' | 'MAESTRIA' | 'DOCTORADO'  |null = null;;
     rol: 'ADMIN' | 'USUARIO' = 'USUARIO';
 }

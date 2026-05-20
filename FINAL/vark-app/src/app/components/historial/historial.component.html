@@ -40,13 +40,8 @@
               <tr>
                 <td class="ps-4">
                   <div class="d-flex align-items-center gap-2">
-                    <div
-                      class="bg-secondary-subtle text-secondary rounded-circle d-flex align-items-center justify-content-center"
-                      style="width: 32px; height: 32px; font-size: 0.85rem"
-                    >
-                      👤
-                    </div>
-                    <span class="fw-semibold text-dark">Usuario #{{ item.usuario_id }}</span>
+                    
+                    <span class="fw-semibold">Usuario #{{ item.usuario_id }}</span>
                   </div>
                 </td>
 
@@ -66,25 +61,22 @@
                   }
                 </td>
 
-                <!-- Columna Grupo -->
                 <td>
                   <span class="text-muted fw-medium fs-6">{{ item.grupo }}</span>
                 </td>
 
-                <!-- Columna Fecha formateada -->
                 <td>
                   <small class="text-secondary">
                     {{ item.fecha_creacion | date: 'dd/MM/yyyy HH:mm' }}
                   </small>
                 </td>
 
-                <!-- Columna Ver Resultado -->
                 <td class="text-end pe-4">
                   <button
                     class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm"
                     (click)="verResultado(item.examen_presentado_id)"
                   >
-                    👁️ Ver resultado
+                    Ver resultado
                   </button>
                 </td>
               </tr>

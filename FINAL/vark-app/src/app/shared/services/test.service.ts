@@ -14,7 +14,9 @@ export class TestService {
   }
 
   guardarExamen(examen: any) {
-    return this.httpService.post('/api/examenes-presentados/enviar', examen, false);
+    const logeado :boolean = this.authService.usuarioLogueado() ? true : false;
+    
+    return this.httpService.post('/api/examenes-presentados/enviar', examen, logeado);
   }
 
   obtenerResultado(idExamenPresentado: number) {

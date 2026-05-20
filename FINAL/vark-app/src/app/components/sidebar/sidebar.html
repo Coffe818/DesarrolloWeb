@@ -39,10 +39,16 @@
         <li class="nav-item mb-1">
           <button class="nav-link text-body" (click)="navigateTo('/grupos')" >Grupos</button>
         </li>
+        <li class="nav-item mb-1">
+          <button class="nav-link text-body" (click)="navigateTo('/usuarios')" >Usuarios</button>
+        </li>
       }
     </ul>
 
     <div class="p-3 border-top bg-light-subtle">
+      <p>
+        {{ authService.usuarioLogueado()?.rol  }} : {{ authService.usuarioLogueado()?.nombre }}
+      </p>
       <button
         class="btn w-100 mb-2"
         [class]="isDarkMode() ? 'btn-dark' : 'btn-outline-dark'"
