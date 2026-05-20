@@ -41,7 +41,9 @@
                 <td class="ps-4">
                   <div class="d-flex align-items-center gap-2">
                     
-                    <span class="fw-semibold">Usuario #{{ item.usuario_id }}</span>
+                    <span class="fw-semibold">
+                      {{ item.usuario_id ? 'Usuario #' + item.usuario_id : 'externo' }}
+                    </span>
                   </div>
                 </td>
 
@@ -62,7 +64,7 @@
                 </td>
 
                 <td>
-                  <span class="text-muted fw-medium fs-6">{{ item.grupo }}</span>
+                  <span class="text-muted fw-medium fs-6">{{ item.grupo || 'N/A' }}</span>
                 </td>
 
                 <td>

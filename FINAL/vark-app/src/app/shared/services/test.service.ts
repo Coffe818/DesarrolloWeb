@@ -25,6 +25,11 @@ export class TestService {
 
   obtenerHistorial() {
     const userId = this.authService.usuarioLogueado()?.usuario_id;
+
+    if(this.authService.esAdmin()) {
+      return this.httpService.get(`/api/examenes-presentados`, true);
+    }
+
     return this.httpService.get(`/api/examenes-presentados/usuario/${userId}`, true);
   }
 }
