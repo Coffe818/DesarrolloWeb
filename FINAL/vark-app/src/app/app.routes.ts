@@ -15,12 +15,16 @@ export const routes: Routes = [
     loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
   },
   {
-    path: 'resultados',
+    path: 'historial',
     canActivate: [segGuard],
-    loadComponent: () => import('./components/resultados/resultados.component').then(m => m.ResultadosComponent)
+    loadComponent: () => import('./components/historial/historial.component').then(m => m.HistorialComponent)
   },
   {
     path: 'resultado/:idExamen',
     loadComponent: () => import('./components/resultado/resultado.component').then(m => m.ResultadoComponent)
+  },
+  {
+    path: 'grupos',
+    loadComponent: () => import('./components/grupos/grupos.component').then(m => m.GruposComponent)
   },
 ];

@@ -5,6 +5,7 @@ import { UsuarioModel } from "../../shared/models/usuario.model";
 import { AuthService } from "../../shared/services/auth.service";
 import { UtilService } from "../../shared/services/util.service";
 import { AlertService } from "../../shared/services/alert.service";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class LoginComponent {
   user: UsuarioModel = new UsuarioModel();
   authService = inject(AuthService);
   alertService = inject(AlertService);
+  router = inject(Router);
 
   togglePassword() {
     this.passwordVisible.set(!this.passwordVisible());
@@ -39,8 +41,7 @@ export class LoginComponent {
     this.authService.login(this.user).subscribe({
       next: (response) => {
         this.alertService.success('¡Inicio de sesión exitoso!');
-        console.log('Usuario logueado:', this.authService.usuarioLogueado());
-        console.log('Token:', this.authService.token());
+        this.router.navigateByUrl('/historial');
       }
     });
   }

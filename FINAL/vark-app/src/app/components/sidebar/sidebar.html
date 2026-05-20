@@ -32,7 +32,12 @@
       </li>
       @if (authService.token()) {
         <li class="nav-item mb-1">
-          <button class="nav-link text-body" (click)="navigateTo('/resultados')" >Resultados</button>
+          <button class="nav-link text-body" (click)="navigateTo('/historial')" >Historial</button>
+        </li>
+      }
+      @if (authService.esAdmin()) {
+        <li class="nav-item mb-1">
+          <button class="nav-link text-body" (click)="navigateTo('/grupos')" >Grupos</button>
         </li>
       }
     </ul>

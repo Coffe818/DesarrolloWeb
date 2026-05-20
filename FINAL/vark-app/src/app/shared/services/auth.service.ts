@@ -13,6 +13,7 @@ export class AuthService {
   utilService = inject(UtilService);
   usuarioLogueado = signal<UsuarioModel | null>(null);
   token = computed(() => this.httpService.token());
+  esAdmin = computed(() => this.usuarioLogueado()?.rol === 'ADMIN');
 
   login(usuario: UsuarioModel) {
     usuario = this.utilService.buildBody(usuario, ['email', 'contrasena']);

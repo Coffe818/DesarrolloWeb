@@ -4,7 +4,6 @@ import { DatePipe } from '@angular/common';
 import { HttpService } from '../../shared/services/http.service';
 import { TestService } from '../../shared/services/test.service';
 
-// Interfaces basadas en tu JSON para un tipado robusto
 interface ExamenInfo {
   examen_id: number;
   tipo: string;
@@ -39,12 +38,12 @@ interface ExamenPresentado {
 }
 
 @Component({
-  selector: 'app-resultados',
+  selector: 'app-historial',
   imports: [DatePipe],
-  templateUrl: './resultados.component.html',
-  styleUrl: './resultados.component.css',
+  templateUrl: './historial.component.html',
+  styleUrl: './historial.component.css',
 })
-export class ResultadosComponent implements OnInit {
+export class HistorialComponent implements OnInit {
   listaExamenes: ExamenPresentado[] = [];
   testService = inject(TestService);
   private router = inject(Router);
@@ -65,7 +64,6 @@ export class ResultadosComponent implements OnInit {
   }
 
   verResultado(idPresentado: number) {
-    // Redirige a la ruta encargada de renderizar las métricas y gráficas del resultado
     this.router.navigateByUrl(`/resultado-examen/${idPresentado}`);
   }
 }
