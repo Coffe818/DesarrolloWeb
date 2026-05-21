@@ -32,4 +32,8 @@ export class TestService {
 
     return this.httpService.get(`/api/examenes-presentados/usuario/${userId}`, true);
   }
+
+  obtenerExamenesGrupo(grupo: string) {
+    return this.httpService.get(`/api/examenes-presentados/grupo/${grupo.toUpperCase()}`, true);
+  }
 }

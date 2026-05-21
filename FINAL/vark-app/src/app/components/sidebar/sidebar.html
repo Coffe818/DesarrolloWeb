@@ -47,7 +47,9 @@
 
     <div class="p-3 border-top bg-light-subtle">
       <p>
-        {{ authService.usuarioLogueado()?.rol  }} : {{ authService.usuarioLogueado()?.nombre }}
+        @if (authService.usuarioLogueado()){
+          {{ authService.usuarioLogueado()?.rol  }} : {{ authService.usuarioLogueado()?.nombre }}
+        }
       </p>
       <button
         class="btn w-100 mb-2"
