@@ -59,7 +59,38 @@ export class ResultadoComponent {
           data: [res.i_count, res.e_count, res.n_count, res.s_count, res.t_count, res.f_count, res.j_count, res.p_count],
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgb(54, 162, 235)',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: 'rgb(54, 162, 235)',
         }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          }
+        },
+        scales: {
+          r: {
+            max: 5,
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1,
+              font: {
+                size: 11
+              }
+            },
+            pointLabels: {
+              font: {
+                size: 12,
+                weight: 'bold'
+              }
+            }
+          }
+        }
       }
     });
   }
