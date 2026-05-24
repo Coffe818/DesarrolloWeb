@@ -2,6 +2,8 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, ElementRef, inject, Input, signal, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { TestService } from '../../shared/services/test.service';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-resultado',
@@ -106,6 +108,50 @@ export class ResultadoComponent {
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
         }]
       }
+    });
+  }
+
+  imprimirResultado() {
+    const resultadoElement = document.getElementById('resultado');
+    
+    if (!resultadoElement) {
+      console.error('No se encontró el elemento de resultado');
+      return;
+    }
+
+    const resultado = this.resultado();
+    if (!resultado) return;
+
+    html2canvas(resultadoElement, {
+      scale: 2,
+      backgroundColor: '#ffffff',
+      useCORS: true,
+      allowTaint: true
+    }).then((canvas) => {
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgData = canvas.toDataURL('image/png');
+
+      while (heightLeft >= 0) {
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+        position -= pageHeight;
+        if (heightLeft > 0) {
+          pdf.addPage();
+        }
+      }
+
+      const fileName = `resultado_${resultado.examen.nombre.replace(/\s+/g, '_')}_${new Date().getTime()}.pdf`;
+      pdf.save(fileName);
+    }).catch((error) => {
+      console.error('Error al generar PDF:', error);
+      alert('Error al generar el PDF. Intenta de nuevo.');
     });
   }
 
