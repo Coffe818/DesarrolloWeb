@@ -104,7 +104,31 @@ export class GruposComponent {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          }
+        },
+        scales: {
+          r: {
+            max: 5,
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1,
+              font: {
+                size: 11
+              }
+            },
+            pointLabels: {
+              font: {
+                size: 12,
+                weight: 'bold'
+              }
+            }
+          }
+        }
       }
     });
   }

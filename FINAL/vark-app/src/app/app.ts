@@ -31,7 +31,7 @@ export class App implements OnInit {
       this.paletaSeleccionada.set(savedPalette);
     }
 
-    //this.AplicarAtributos();
+    this.AplicarAtributos();
   }
   CambiarPaleta(num: string): void {
     this.paletaSeleccionada.set(num);
